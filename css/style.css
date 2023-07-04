@@ -1,8 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+
 html {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   color: var(--text-color);
   background-color: var(--bg-color);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -58,14 +63,20 @@ body::-webkit-scrollbar {
   margin-bottom: 1rem;
 }
 
+h1,
+h2,
+h3 {
+  font-family: "Open Sans", sans-serif;
+}
+
 h2.section__title {
   font-size: 1.5rem;
 }
 
 h3.section__title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-transform: none;
-  font-style: italic;
+  margin-top: 2rem;
 }
 
 .mb__2 {
@@ -81,6 +92,18 @@ p.section__text {
 img.logo {
   height: 150px;
   border-radius: 50%;
+}
+
+img.repository__logo {
+  height: 25px;
+  border-radius: 50%;
+  padding: 0.25rem;
+  background-color: var(--elevated-bg-color);
+  transition: all 0.2s ease-in-out;
+}
+
+img.repository__logo:hover {
+  opacity: 0.6;
 }
 
 ul {
@@ -102,19 +125,65 @@ a:visited {
   color: var(--link-color);
 }
 
-a.button.repository {
+a.page__link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  display: none;
+
+  background-color: var(--elevated-bg-color);
+  opacity: 0.6;
+}
+
+.material-symbols-outlined {
+  color: var(--link-color);
+  font-size: 3rem;
+}
+
+.footer__row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a.button {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   background-color: var(--elevated-bg-color);
   border: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
-  margin: 0 0 1rem 0;
   cursor: pointer;
 }
 
-a.button.repository:hover {
+a.button:hover {
   background-color: var(--border-color);
+}
+
+.pills {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--elevated-bg-color);
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
 }
 
 :root {
