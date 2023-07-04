@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Josh Van Der Veen</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/logo.jpg" />
+    <script src="/js/script.js" defer></script>
   </head>
   <body>
     <div class="page__title card">
@@ -29,51 +35,96 @@
           <h2 class="section__title mb__2">Projects:</h2>
           <div class="break"></div>
           <div class="card__section">
-            <h3 class="section__title">EasyLocs</h3>
+            <div class="title__row">
+              <h3 class="section__title">EasyLocs</h3>
+            </div>
             <p class="section__text">
               EasyLocs is a web application that I built for MECS. It allows
               users to manage the PC Locs stations in their school. It allows
               users to view the status of each station, and to manage stations
               for their students.
             </p>
-            <p class="section__text">
-              It is built with a React front end, a Node.js back end, and a
-              MongoDB database. It uses the PC Locs API to communicate with the
-              stations.
-            </p>
+            <div class="pills">
+              <div class="pill">React</div>
+              <div class="pill">NodeJS</div>
+              <div class="pill">MongoDB</div>
+              <div class="pill">JavaScript</div>
+            </div>
           </div>
           <div class="break"></div>
           <div class="card__section">
-            <h3 class="section__title">Find Referrals</h3>
+            <div class="title__row">
+              <h3 class="section__title">Find Referrals</h3>
+            </div>
             <p class="section__text">
               Find Referrals is a web application and mobile app that I built
               for Find Networks. It allows users to find and refer businesses to
               other members of the Find Networks community, and to track the
               referrals that they have made.
             </p>
-            <p class="section__text">
-              It is built with a React front end, a Node.js back end, and a
-              MySQL database. The mobile app is built with React Native.
-            </p>
+            <div class="pills">
+              <div class="pill">React</div>
+              <div class="pill">React Native</div>
+              <div class="pill">NodeJS</div>
+              <div class="pill">MySQL</div>
+              <div class="pill">Typescript</div>
+            </div>
           </div>
           <div class="break"></div>
           <div class="card__section">
-            <h3 class="section__title">ShortLink</h3>
+            <div class="title__row">
+              <h3 class="section__title">Service Desk Queue</h3>
+            </div>
+            <p class="section__text">
+              Find Referrals is a mobile app that I built for MECS. It allows
+              users to interact with our asset management system, and manage the
+              devices and tickets that are being serviced.
+            </p>
+            <div class="pills">
+              <div class="pill">React Native</div>
+              <div class="pill">JavaScript</div>
+            </div>
+          </div>
+          <div class="card__section">
+            <div class="title__row">
+              <h3 class="section__title">Event Manager</h3>
+            </div>
+            <p class="section__text">
+              Find Referrals is a web app that reads event logs that monitor the
+              usage of a file server, and it displays it in a readable format.
+            </p>
+            <div class="pills">
+              <div class="pill">Flask</div>
+              <div class="pill">Python</div>
+            </div>
+          </div>
+          <div class="break"></div>
+          <div class="card__section">
+            <div class="title__row">
+              <h3 class="section__title">ShortLink</h3>
+            </div>
             <p class="section__text">
               ShortLink is a chrome extension that allows users to save links
               and when searching and set a custom name for them, so they can
               search with the sl prefix and the custom name instead. It also
               allows users to browse the links they have sent.
             </p>
-            <p class="section__text">
-              It was built with HTML, CSS, and JavaScript.
-            </p>
-            <a
-              class="button outlined repository"
-              href="https://github.com/joshvanderveen/ShortLink"
-              target="_blank"
-              >Repository</a
-            >
+            <div class="footer__row">
+              <div class="pills">
+                <div class="pill">HTML</div>
+                <div class="pill">CSS</div>
+                <div class="pill">JavaScript</div>
+              </div>
+              <a
+                href="https://github.com/joshvanderveen/ShortLink"
+                target="_blank"
+              >
+                <img
+                  src="/images/github-logo.png"
+                  alt="Repository link"
+                  class="repository__logo"
+              /></a>
+            </div>
           </div>
           <div class="break"></div>
           <div class="card__section">
@@ -83,15 +134,22 @@
               assignment. It allows users to play the game, as well as customise
               boards, the amount of players, pieces and so on.
             </p>
-            <p class="section__text">
-              It was built with Java, and uses JavaFX for the GUI.
-            </p>
-            <a
-              class="button outlined repository"
-              href="https://github.com/joshvanderveen/NineMansMorris"
-              target="_blank"
-              >Repository</a
-            >
+            <div class="footer__row">
+              <div class="pills">
+                <div class="pill">JavaFX</div>
+                <div class="pill">Java</div>
+              </div>
+              <a
+                href="https://github.com/joshvanderveen/NineMansMorris"
+                target="_blank"
+              >
+                <img
+                  src="/images/github-logo.png"
+                  alt="Repository link"
+                  class="repository__logo"
+                />
+              </a>
+            </div>
           </div>
           <div class="card__section">
             <h3 class="section__title">JWT Auth Boilerplate</h3>
@@ -100,15 +158,22 @@
               authentication in Node.js applications. It allows users to
               register, login, and logout, and uses JWTs to authenticate users.
             </p>
-            <p class="section__text">
-              It was built with Java, and uses JavaFX for the GUI.
-            </p>
-            <a
-              class="button outlined repository"
-              href="https://github.com/joshvanderveen/jwt-auth"
-              target="_blank"
-              >Repository</a
-            >
+            <div class="footer__row">
+              <div class="pills">
+                <div class="pill">ReactJS</div>
+                <div class="pill">NodeJS</div>
+                <div class="pill">Mongd</div>
+              </div>
+              <a
+                href="https://github.com/joshvanderveen/jwt-auth"
+                target="_blank"
+              >
+                <img
+                  src="/images/github-logo.png"
+                  alt="Repository link"
+                  class="repository__logo"
+              /></a>
+            </div>
           </div>
         </section>
       </div>
@@ -116,17 +181,22 @@
         <section class="card">
           <h2 class="section__title">Contact</h2>
           <ul>
-            <li>Website: <a href="joshvdv.com">joshvdv.com</a></li>
+            <li>
+              Website:
+              <a href="https://joshvdv.com" target="_blank">joshvdv.com</a>
+            </li>
             <li>
               LinkedIn:
-              <a href="www.linkedin.com/in/josh-van-der-veen"
-                >www.linkedin.com/in/josh-van-der-veen</a
+              <a
+                href="https://www.linkedin.com/in/josh-van-der-veen"
+                target="_blank"
+                >linkedin.com/in/josh-van-der-veen</a
               >
             </li>
             <li>
               Github:
-              <a href="https://github.com/joshvanderveen"
-                >https://github.com/joshvanderveen></a
+              <a href="https://github.com/joshvanderveen" target="_blank"
+                >github.com/joshvanderveen</a
               >
             </li>
             <li>Location: Melbourne, Australia</li>
@@ -156,37 +226,42 @@
         <section class="card">
           <h2 class="section__title">Skills</h2>
           <h3 class="section__title">Frontend</h3>
-          <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Angular</li>
-          </ul>
+          <div class="pills">
+            <div class="pill">HTML</div>
+            <div class="pill">CSS</div>
+            <div class="pill">JavaScript</div>
+            <div class="pill">React</div>
+            <div class="pill">Angular</div>
+          </div>
           <h3 class="section__title">Backend</h3>
-          <ul>
-            <li>NodeJS</li>
-            <li>Flask (Python)</li>
-            <li>PHP</li>
-          </ul>
+          <div class="pills">
+            <div class="pill">NodeJS</div>
+            <div class="pill">Flask</div>
+            <div class="pill">PHP</div>
+          </div>
           <h3 class="section__title">Database</h3>
-          <ul>
-            <li>MySQL</li>
-            <li>MongoDB</li>
-          </ul>
+          <div class="pills">
+            <div class="pill">MySQL</div>
+            <div class="pill">MongoDB</div>
+            <div class="pill">Oracle SQL Server</div>
+          </div>
           <h3 class="section__title">Other</h3>
-          <ul>
-            <li>Java</li>
-            <li>C++</li>
-            <li>TypeScript</li>
-            <li>Object Oriented Principles</li>
-            <li>Git</li>
-            <li>PowerShell</li>
-            <li>Google Cloud Platform</li>
-            <li>Windows IIS</li>
-          </ul>
+          <div class="pills">
+            <div class="pill">Java</div>
+            <div class="pill">C++</div>
+            <div class="pill">React Native</div>
+            <div class="pill">TypeScript</div>
+            <div class="pill">Object Oriented Principles</div>
+            <div class="pill">Git</div>
+            <div class="pill">PowerShell</div>
+            <div class="pill">Google Cloud Platform</div>
+            <div class="pill">Windows IIS</div>
+          </div>
         </section>
       </div>
     </div>
+    <a class="page__link" href="#top">
+      <span class="material-symbols-outlined"> keyboard_arrow_up </span>
+    </a>
   </body>
 </html>
