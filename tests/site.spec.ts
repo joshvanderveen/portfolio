@@ -3,8 +3,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { services } from '../src/data/services';
 
 const pages = [
-  { path: '/', h1: 'Websites and apps that pull their weight.' },
-  { path: '/work', h1: 'Work that earns its keep.' },
+  { path: '/', h1: 'Software that earns its keep.' },
+  { path: '/work', h1: 'Built, launched and still looked after.' },
   { path: '/work/find-cards', h1: 'FIND Cards' },
   { path: '/work/foxwood-media', h1: 'Foxwood Media' },
   { path: '/work/homeward', h1: 'Homeward' },
