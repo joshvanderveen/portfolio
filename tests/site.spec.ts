@@ -53,7 +53,7 @@ test('navigation marks the current page and reaches every section', async ({ pag
   await expect(page).toHaveURL(/\/work\/homeward$/);
   await page.locator('main a[href="/work/find-cards"]').filter({ hasText: 'Next case study' }).click();
   await expect(page).toHaveURL(/\/work\/find-cards$/);
-  await nav.getByRole('link', { name: 'Book a call' }).click();
+  await page.getByRole('banner').getByRole('link', { name: 'Book a call' }).click();
   await expect(page).toHaveURL(/\/contact$/);
 });
 

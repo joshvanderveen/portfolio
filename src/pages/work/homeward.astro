@@ -60,7 +60,7 @@ const details = [
     </div>
   </section>
 
-  <section class="section grid grid--tight" style="--min: 480px" aria-label="Screens from Homeward">
+  <section class="section grid grid--tight swipe" style="--min: 480px" aria-label="Screens from Homeward" tabindex="0">
     {screens.map(item => <figure class="case-figure"><Shot label={item.label} screen={item.screen} class="ui-shot" /><figcaption>{item.caption}</figcaption></figure>)}
   </section>
 

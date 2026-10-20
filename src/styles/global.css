@@ -68,8 +68,8 @@
   .skip-link:focus { top: 16px; }
 
   /* Header and footer */
-  .site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 24px; }
-  .brand { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; }
+  .site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding-block: 24px; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; margin-right: auto; }
   .brand span { color: var(--accent); }
   .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px; }
   .site-nav a:not(.button) { color: var(--muted); text-decoration: none; }
@@ -186,4 +186,49 @@
   .next a.next__case { background: var(--panel); text-decoration: none; }
   .next .next__title { font-family: var(--display); font-weight: 600; font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em; line-height: 1.08; }
   .next .next__cta { background: var(--accent); color: var(--on-accent); }
+
+  /* Rows of figures that become a swipeable strip on phones. */
+  .swipe:focus-visible { outline-offset: 6px; }
+}
+
+/* Phones only: tighter spacing and simpler layouts. Desktop is unaffected. */
+@layer components {
+  @media (max-width: 700px) {
+    :root { --section: 64px; }
+
+    /* Logo and "Book a call" on one row, the page links on a row of their own. */
+    .site-header { padding-block: 16px 4px; row-gap: 8px; }
+    .site-nav { order: 3; flex: 1 1 100%; gap: 0 24px; border-top: 1px solid var(--line); }
+    .site-nav a:not(.button) { display: inline-flex; align-items: center; min-height: 44px; }
+
+    .panel { padding: 32px 20px; border-radius: 24px; }
+    .hero { gap: 24px; }
+    .lead { font-size: 17px; }
+    .note { font-size: 23px; }
+
+    .trusted { justify-content: flex-start; gap: 6px 24px; padding-top: 32px; }
+    .trusted > span { flex: 1 1 100%; }
+    .trusted li { font-size: 18px; }
+
+    .card { border-radius: 24px; padding: 12px 12px 24px; gap: 20px; }
+    .card__body { padding-inline: 8px; }
+    .card__body h2, .card__body h3 { font-size: 24px; }
+    .tile { padding: 24px; border-radius: 20px; }
+    .steps li { padding: 24px; border-radius: 20px; }
+    .band { padding: 28px 22px; border-radius: 24px; }
+    .faq details { padding: 18px 20px; }
+    .faq summary { font-size: 17px; }
+    .feature { padding: 16px 16px 24px; border-radius: 24px; gap: 24px; }
+    .feature > div:first-child { padding-inline: 4px; }
+    .rows > div { padding-block: 20px; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; padding-top: 24px; }
+    .next > * { padding: 24px 22px; border-radius: 24px; }
+
+    .swipe { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+    .swipe::-webkit-scrollbar { display: none; }
+    .swipe > * { flex: 0 0 86%; scroll-snap-align: start; }
+    .swipe--phones > * { flex-basis: 64%; }
+
+    .site-footer__services { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+  }
 }
