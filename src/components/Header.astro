@@ -1,0 +1,14 @@
+---
+import { nav } from '../data/site';
+
+interface Props { path: string; }
+const { path } = Astro.props;
+const current = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+<header class="site-header">
+  <a class="brand" href="/" aria-label="JVDV home">JVDV<span>.</span></a>
+  <nav class="site-nav" aria-label="Main">
+    {nav.map(item => <a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a>)}
+    <a class="button button--small" href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Book a call</a>
+  </nav>
+</header>

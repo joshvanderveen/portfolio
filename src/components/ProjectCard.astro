@@ -1,0 +1,19 @@
+---
+import Shot from './Shot.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  heading?: 'h2' | 'h3';
+}
+const { project, heading: Heading = 'h3' } = Astro.props;
+---
+<article class="card" data-categories={project.categories.join(' ')}>
+  <Shot label={project.shot} screens={project.screens} screen={project.cover} ratio="16 / 11" />
+  <div class="card__body">
+    <Heading>{project.name}</Heading>
+    <p class="muted">{project.summary}</p>
+    <ul class="tags" aria-label="What we did">{project.tags.map(tag => <li>{tag}</li>)}</ul>
+    {project.href && <a class="text-link" href={project.href}>Read the case study<span class="sr-only">: {project.name}</span></a>}
+  </div>
+</article>

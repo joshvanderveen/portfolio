@@ -1,0 +1,81 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import Shot from '../../components/Shot.astro';
+import { foxwoodScreens as site } from '../../data/projects';
+
+const pages = [
+  { label: 'Stories gallery', screen: site.gallery, caption: 'Stories are curated by hand, not pulled from Instagram, so the best work always leads.' },
+  { label: 'Wedding photography service page', screen: site.wedding, caption: 'Each service page answers the questions couples ask before they book.' },
+  { label: 'Enquiry form on mobile', screen: site.enquire, caption: 'A short enquiry form that works just as well on a phone.' },
+];
+const care = [
+  { title: 'Photos that load quickly', text: 'Every image is prepared in several sizes and modern formats, so galleries stay sharp without slowing phones down.' },
+  { title: 'Accessible by design', text: 'Pages are tested for keyboard use, contrast and screen readers on every update.' },
+  { title: 'Looked after', text: 'Hosting, security and updates are handled for them, so they can stay behind the camera.' },
+];
+---
+<CaseStudy
+  name="Foxwood Media"
+  intro="A website for a Melbourne husband-and-wife photography and film team that puts their work first, and that they keep up to date themselves."
+  description="How JVDV designed and built the Foxwood Media website: a story-led gallery, six service pages and an editor the photographers use themselves."
+  facts={[
+    { label: 'Client', value: 'Foxwood Media' },
+    { label: 'Industry', value: 'Wedding and family photography and film' },
+    { label: 'What we did', value: 'Website design and build, SEO, hosting and care' },
+    { label: 'Live site', value: 'foxwoodmedia.com.au', href: 'https://foxwoodmedia.com.au' },
+  ]}
+  heroShot="Hero image: Foxwood Media homepage on desktop and phone"
+  heroScreen={site.home}
+  next={{ name: 'FIND Cards', href: '/work/find-cards' }}
+  cta={{ note: 'need a new website?', heading: 'Let’s make yours.' }}
+>
+  <section class="section case-columns">
+    <div>
+      <h2>The brief</h2>
+      <p class="muted">Benjamin and Keely McLauchlan photograph and film weddings, couples, families, newborns and pets across Melbourne. Most of their work lived on Instagram, where it was hard for couples to see everything they offer or get in touch.</p>
+      <p class="muted">They needed a site that lets the photos do the talking, explains each service clearly and turns visitors into enquiries. And they wanted to update it themselves, without waiting on a developer.</p>
+    </div>
+    <div>
+      <h2>What we built</h2>
+      <ul class="ticks">
+        <li>A gallery of 16 photo and film stories, each telling a couple’s or family’s day in order</li>
+        <li>A page for each of their six services, with FAQs, related stories and a direct enquiry link</li>
+        <li>An About page that introduces Benjamin and Keely and the way they work together</li>
+        <li>An enquiry form that lands in their inbox straight away</li>
+        <li>Search-friendly pages for every service, so local couples find them on Google</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section grid grid--tight" style="--min: 300px" aria-label="Pages from the site">
+    {pages.map(page => <figure class="case-figure"><Shot label={page.label} screen={page.screen} /><figcaption>{page.caption}</figcaption></figure>)}
+  </section>
+
+  <section class="section">
+    <div class="feature">
+      <div>
+        <p class="note note--accent">theirs to run</p>
+        <h2 style="font-size: clamp(28px, 3vw, 40px)">New stories go live in minutes, no developer needed.</h2>
+        <p class="muted">Benjamin and Keely sign in to a simple editor to change any page, add a new story or post a review. Photos straight off an iPhone are resized automatically, and changes are live about five minutes after they hit save.</p>
+      </div>
+      <Shot label="A story page" screen={site.story} class="story-shot" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="care-heading">
+    <h2 id="care-heading" style="font-size: clamp(28px, 3vw, 40px); margin-bottom: 28px">Fast where it counts</h2>
+    <ul class="grid grid--tight" style="--min: 280px">
+      {care.map(item => <li class="tile"><h3 style="font-size: 21px">{item.title}</h3><p>{item.text}</p></li>)}
+    </ul>
+  </section>
+</CaseStudy>
+
+<style>
+  .case-columns { display: flex; flex-wrap: wrap; gap: 40px 64px; }
+  .case-columns > div { flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px; }
+  .case-columns h2 { font-size: clamp(28px, 3vw, 40px); }
+  .case-figure { display: flex; flex-direction: column; gap: 12px; }
+  .case-figure :global(.shot) { border-radius: 24px; }
+  :global(.story-shot) { border-radius: 14px; }
+  .case-figure figcaption { font-size: 15px; color: var(--muted); }
+</style>

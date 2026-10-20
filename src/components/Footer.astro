@@ -1,0 +1,12 @@
+---
+import { site } from '../data/site';
+---
+<footer class="site-footer">
+  <span>{site.name}, Melbourne{site.abn && ` · ABN ${site.abn}`}</span>
+  <nav aria-label="Footer">
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <a href={site.linkedin}>LinkedIn</a>
+    <a href={site.github}>GitHub</a>
+    <a href="/privacy">Privacy</a>
+  </nav>
+</footer>

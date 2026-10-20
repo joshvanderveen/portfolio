@@ -1,0 +1,7 @@
+---
+import { clients } from '../data/site';
+---
+<section class="trusted" aria-label="Clients">
+  <span>Trusted by</span>
+  <ul>{clients.map(client => <li>{client}</li>)}</ul>
+</section>

@@ -1,0 +1,57 @@
+---
+// Shared frame for case study pages: breadcrumb, intro panel with key facts, and the
+// "next case study" links at the end. The page supplies the story in between.
+import Base from '../layouts/Base.astro';
+import Shot from './Shot.astro';
+import type { Screen } from '../data/projects';
+
+interface Props {
+  name: string;
+  intro: string;
+  description: string;
+  facts: { label: string; value: string; href?: string }[];
+  heroShot: string;
+  heroScreens?: Screen[];
+  heroScreen?: Screen;
+  next: { name: string; href: string };
+  cta: { note: string; heading: string };
+}
+const { name, intro, description, facts, heroShot, heroScreens, heroScreen, next, cta } = Astro.props;
+---
+<Base title={`${name} case study`} description={description}>
+  <p class="breadcrumb"><a href="/work">Work</a> / {name}</p>
+  <section class="panel case-intro">
+    <div class="case-intro__text">
+      <p class="note note--accent">case study</p>
+      <h1>{name}</h1>
+      <p class="lead">{intro}</p>
+    </div>
+    <dl class="facts">
+      {facts.map(fact => <div><dt>{fact.label}</dt><dd>{fact.href ? <a class="text-link" href={fact.href}>{fact.value}</a> : fact.value}</dd></div>)}
+    </dl>
+  </section>
+  <Shot label={heroShot} screens={heroScreens} screen={heroScreen} ratio="16 / 8" sizes="(max-width: 1320px) 94vw, 1240px" class="case-hero-shot" />
+
+  <slot />
+
+  <section class="section next" aria-label="Keep exploring">
+    <a class="next__case" href={next.href}>
+      <span class="dim" style="font-size: 14px">Next case study</span>
+      <span class="next__title">{next.name}</span>
+      <span class="text-link">Read the case study</span>
+    </a>
+    <div class="next__cta">
+      <p class="note">{cta.note}</p>
+      <p class="next__title">{cta.heading}</p>
+      <a class="button button--inverse" href="/contact">Book a free consult</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .case-intro { display: flex; flex-direction: column; gap: 40px; }
+  .case-intro__text { display: flex; flex-direction: column; gap: 20px; }
+  .case-intro h1 { font-size: clamp(44px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; }
+  .case-intro .lead { font-size: clamp(19px, 1.8vw, 23px); line-height: 1.45; max-width: 48ch; }
+  :global(.case-hero-shot) { margin-top: 20px; border-radius: 28px; }
+</style>

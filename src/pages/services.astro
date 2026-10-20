@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import { services, steps, faqs } from '../data/services';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })),
+};
+---
+<Base title="Services" description="Website design and build, e-commerce stores, custom web apps, mobile apps, SEO, and hosting and maintenance from one Melbourne studio." jsonLd={[faqLd]}>
+  <section class="panel hero">
+    <div class="hero__main">
+      <p class="note note--accent">what we do</p>
+      <h1 style="max-width: 17ch">Everything your business needs online.</h1>
+    </div>
+    <div class="hero__side">
+      <p class="lead">Pick a single service or hand us the lot. Either way, one team is accountable from the first idea to years of support.</p>
+      <a class="button" href="/contact">Book a free consult</a>
+    </div>
+  </section>
+
+  <div class="grid service-grid" style="--min: 520px">
+    {services.map(service => (
+      <article class="tile service" id={service.id}>
+        <h2>{service.title}</h2>
+        <p>{service.description}</p>
+        <ul class="ticks" aria-label={`Included in ${service.title}`}>{service.included.map(item => <li>{item}</li>)}</ul>
+        <a class="text-link" href="/contact">{service.cta}</a>
+      </article>
+    ))}
+  </div>
+
+  <section class="section" aria-labelledby="process-heading">
+    <div class="section-head">
+      <h2 id="process-heading">How a project runs</h2>
+      <p class="note note--accent">no surprises at the end</p>
+    </div>
+    <ol class="steps">
+      {steps.map(step => <li><strong>{step.title}</strong><span>{step.text}</span></li>)}
+    </ol>
+  </section>
+
+  <section class="section split" aria-labelledby="faq-heading">
+    <div>
+      <h2 id="faq-heading">Questions we get asked</h2>
+      <p class="muted">Something else on your mind? <a class="text-link" href="/contact">Ask us directly.</a></p>
+    </div>
+    <div class="faq">
+      {faqs.map((faq, index) => <details open={index === 0}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
+    </div>
+  </section>
+
+  <Band note="not sure where to start?" heading="Tell us the problem. We’ll suggest the fix." />
+</Base>
+
+<style>
+  .service-grid { padding-top: 20px; }
+  .service { border-radius: 28px; padding: clamp(28px, 3.5vw, 44px); gap: 18px; scroll-margin-top: 24px; }
+  .service h2 { font-size: 30px; letter-spacing: -0.025em; line-height: 1.1; }
+  .service .text-link { margin-top: auto; }
+</style>

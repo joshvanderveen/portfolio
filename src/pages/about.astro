@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Shot from '../components/Shot.astro';
+import Trusted from '../components/Trusted.astro';
+import Band from '../components/Band.astro';
+
+const principles = [
+  { title: 'One team, start to finish', text: 'The people who scope your project design it, build it and support it. Nothing gets lost in a handover.' },
+  { title: 'Fixed quotes, clear scope', text: 'You know what you’re getting and what it costs before work starts. No surprise invoices.' },
+  { title: 'Built to last', text: 'Fast, accessible and secure by default, on technology that won’t need replacing next year.' },
+];
+const audiences = [
+  { title: 'Retailers', text: 'E-commerce stores and websites that turn browsers into buyers.' },
+  { title: 'Service businesses', text: 'Sites and booking tools that keep the phone ringing.' },
+  { title: 'Founders and platforms', text: 'Web and mobile products like FIND Cards and Trakkrr, from first version to growth.' },
+];
+---
+<Base title="About" description="JVDV is a Melbourne design and development studio. We build websites, stores and apps, then host them, look after them and keep making them better.">
+  <section class="panel about-hero">
+    <div class="hero" style="margin-top: 0">
+      <div class="hero__main">
+        <p class="note note--accent">about the studio</p>
+        <h1 style="max-width: 16ch">A studio that sticks around after launch.</h1>
+      </div>
+      <p class="lead hero__side">JVDV is a Melbourne design and development studio. We build websites, stores and apps, then host them, look after them and keep making them better.</p>
+    </div>
+    <Shot label="Studio photo or work-in-progress collage" ratio="21 / 8" class="about-hero-shot" />
+  </section>
+
+  <section class="section" aria-labelledby="principles-heading">
+    <h2 id="principles-heading" style="margin-bottom: 32px">How we like to work</h2>
+    <ul class="grid grid--tight">
+      {principles.map(item => <li class="tile" style="padding: 36px 32px"><h3 style="font-size: 24px">{item.title}</h3><p>{item.text}</p></li>)}
+    </ul>
+  </section>
+
+  <section class="section split" aria-labelledby="audience-heading">
+    <div>
+      <h2 id="audience-heading">Who we work with</h2>
+      <p class="note note--accent">big plans, small teams</p>
+    </div>
+    <div class="rows">
+      {audiences.map(item => <div><h3>{item.title}</h3><p>{item.text}</p></div>)}
+    </div>
+  </section>
+
+  <Trusted />
+
+  <Band note="say hello" heading="Let’s see if we’re a good fit." />
+</Base>
+
+<style>
+  .about-hero { margin-top: 8px; padding-bottom: 0; display: flex; flex-direction: column; gap: 48px; overflow: hidden; }
+  :global(.about-hero-shot) { border-radius: 24px 24px 0 0; }
+</style>

@@ -1,0 +1,19 @@
+---
+// The cyan call-to-action band that closes most pages.
+interface Props {
+  note: string;
+  heading: string;
+  href?: string;
+  label?: string;
+}
+const { note, heading, href = '/contact', label = 'Book a free consult' } = Astro.props;
+---
+<section class="section">
+  <div class="band">
+    <div>
+      <p class="note">{note}</p>
+      <h2>{heading}</h2>
+    </div>
+    <a class="button button--inverse" href={href}>{label}</a>
+  </div>
+</section>

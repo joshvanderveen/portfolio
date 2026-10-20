@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // The website is a Worker that only serves static files from dist/ (no script), so requests are free.
+  // _headers and 404.html in dist/ are applied by Workers static assets.
+  "name": "jvdv-website",
+  "compatibility_date": "2026-09-01",
+  "send_metrics": false,
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Wrangler replaces the Worker's domains with this list on every deploy, so keep it complete.
+  "routes": [
+    { "pattern": "joshvdv.com", "custom_domain": true },
+    { "pattern": "www.joshvdv.com", "custom_domain": true }
+  ],
+  "workers_dev": true
+}
