@@ -39,6 +39,6 @@ Before it works in production:
 
 ## Deploying
 
-GitHub Actions (`.github/workflows/site.yml`) checks, builds and tests every pull request, and on `main` deploys `dist/` to the `jvdv-website` Worker. `.github/workflows/workers.yml` deploys the enquiry Worker when `worker/` changes. Both need the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`; set the `SITE_URL` Actions variable to build for a different domain.
+GitHub Actions (`.github/workflows/site.yml`) checks, builds and tests every pull request, and on `main` deploys `dist/` to the `jvdv-website` Worker. `.github/workflows/workers.yml` deploys the enquiry Worker when `worker/` changes, and the `jvdv-www-redirect` Worker (`redirect/`, which 301s `www.joshvdv.com` to the apex) when `redirect/` changes. Both need the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`; set the `SITE_URL` Actions variable to build for a different domain.
 
 To deploy by hand: `npx wrangler login`, then `npm run deploy`.

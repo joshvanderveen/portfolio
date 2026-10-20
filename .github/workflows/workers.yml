@@ -1,9 +1,10 @@
-name: Deploy enquiry Worker
-# Deploys the enquiry Worker (worker/) when its code changes on main, or on demand from the Actions tab.
+name: Deploy Workers
+# Deploys the enquiry Worker (worker/) and the www redirect Worker (redirect/) when their code
+# changes on main, or on demand from the Actions tab.
 on:
   push:
     branches: [main]
-    paths: ['worker/**', '.github/workflows/workers.yml']
+    paths: ['worker/**', 'redirect/**', '.github/workflows/workers.yml']
   workflow_dispatch:
 
 permissions:
@@ -33,3 +34,6 @@ jobs:
       - name: Deploy enquiry Worker
         if: env.CLOUDFLARE_API_TOKEN != ''
         run: npx wrangler deploy --config worker/wrangler.jsonc
+      - name: Deploy www redirect Worker
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy --config redirect/wrangler.jsonc
