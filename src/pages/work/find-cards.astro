@@ -1,0 +1,72 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import Shot from '../../components/Shot.astro';
+import { findCardsScreens as app } from '../../data/projects';
+
+const screens = [
+  { label: 'Explore screen', screen: app.explore, caption: 'Explore brings categories, local businesses and popular deals together in one place.' },
+  { label: 'Deal screen', screen: app.deal, caption: 'Every offer shows the saving, how long it runs and where to use it, with Redeem one tap away.' },
+  { label: 'Charity vote screen', screen: app.charity, caption: 'Members vote for the charity their membership supports.' },
+];
+---
+<CaseStudy
+  name="FIND Cards"
+  kind="Membership App"
+  services={["mobile-apps", "web-apps", "hosting-maintenance"]}
+  ogScreen={app.portal}
+  intro="A membership app that connects people with deals from local businesses, and gives back to the charities they care about."
+  description="How JVDV Studio designed and built FIND Cards: a membership app for local deals with a business portal and charity voting, for iOS, Android and the web."
+  facts={[
+    { label: 'Client', value: 'FIND Foundation' },
+    { label: 'Industry', value: 'Loyalty and local business' },
+    { label: 'What we did', value: 'Product design, mobile app, business portal, ongoing support' },
+    { label: 'Platforms', value: 'iOS, Android and web' },
+  ]}
+  heroShot="Hero image: FIND Cards app on phones, deals list and map"
+  heroScreens={[app.explore, app.home, app.map]}
+  next={{ name: 'Foxwood Media', href: '/work/foxwood-media' }}
+  cta={{ note: 'building an app?', heading: 'Let’s talk about yours.' }}
+>
+  <section class="section case-columns">
+    <div>
+      <h2>The brief</h2>
+      <p class="muted">FIND Cards wanted to turn its membership card into something members actually use every week. Members needed an easy way to find deals near them, and local businesses needed a simple way to publish offers and see them redeemed.</p>
+      <p class="muted">On top of that, every membership supports a charity, so members needed a say in which organisation their membership helps.</p>
+    </div>
+    <div>
+      <h2>What we built</h2>
+      <ul class="ticks">
+        <li>A mobile app for members to browse, save and redeem deals and coupons from nearby businesses</li>
+        <li>Distance-based search, so the closest offers always appear first</li>
+        <li>Charity voting, so members choose where their membership gives back</li>
+        <li>A business portal where owners create offers, set redemption limits and switch deals on or off</li>
+        <li>An admin dashboard to manage businesses, regions, categories and giveaways</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section grid grid--tight" style="--min: 300px" aria-label="App screens">
+    {screens.map(item => <figure class="case-figure"><Shot label={item.label} screen={item.screen} /><figcaption>{item.caption}</figcaption></figure>)}
+  </section>
+
+  <section class="section">
+    <div class="feature">
+      <div>
+        <p class="note note--accent">for business owners</p>
+        <h2 style="font-size: clamp(28px, 3vw, 40px)">A portal that makes publishing a deal easy.</h2>
+        <p class="muted">Owners log in to their own portal to add coupons and deals, set prices and dates, cap how many times each can be redeemed and pause offers when they need to.</p>
+      </div>
+      <Shot label="Web portal" screen={app.portal} class="portal-shot" />
+    </div>
+  </section>
+</CaseStudy>
+
+<style>
+  .case-columns { display: flex; flex-wrap: wrap; gap: 40px 64px; }
+  .case-columns > div { flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px; }
+  .case-columns h2, .case-figure + h2 { font-size: clamp(28px, 3vw, 40px); }
+  .case-figure { display: flex; flex-direction: column; gap: 12px; }
+  .case-figure :global(.shot) { border-radius: 24px; }
+  .case-figure figcaption { font-size: 15px; color: var(--muted); }
+  :global(.portal-shot) { border-radius: 14px; }
+</style>

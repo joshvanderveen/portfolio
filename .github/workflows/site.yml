@@ -1,0 +1,63 @@
+name: Check and deploy website
+# Pull requests: check, build and test.
+# Pushes to main: the same, then deploy dist/ to the jvdv-website Worker (static assets).
+# Needs repository secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; without them the deploy steps are skipped.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write # commits content/sitemap-lastmod.json back after a deploy
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SITE_URL: ${{ vars.SITE_URL || 'https://joshvdv.com' }}
+      WRANGLER_SEND_METRICS: 'false'
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DEPLOY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: ${{ github.event_name != 'pull_request' }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Publish to Cloudflare
+        if: env.DEPLOY == 'true' && env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy --message "$(git log -1 --format=%s | head -c 100)"
+      - name: Skip publishing (no Cloudflare token)
+        if: env.DEPLOY == 'true' && env.CLOUDFLARE_API_TOKEN == ''
+        run: echo "::warning::CLOUDFLARE_API_TOKEN is not set, so this build was not published."
+
+      - name: Save sitemap dates
+        if: env.DEPLOY == 'true' && env.CLOUDFLARE_API_TOKEN != ''
+        run: |
+          git diff --quiet -- content/sitemap-lastmod.json && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/sitemap-lastmod.json
+          git commit -m 'Update sitemap dates [skip ci]'
+          git pull --rebase origin main && git push origin HEAD:main || echo "::warning::Could not save sitemap dates; the next deploy will retry."

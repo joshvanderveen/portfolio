@@ -1,0 +1,54 @@
+---
+import { site, budgets, timelines } from '../data/site';
+import { services } from '../data/services';
+
+interface Props {
+  // "short" for the home page, "full" for the contact page.
+  variant?: 'short' | 'full';
+}
+const { variant = 'short' } = Astro.props;
+const id = `enquiry-${variant}`;
+---
+<form class="form" id={id} data-enquiry data-recipient={site.email} novalidate>
+  <fieldset class="form__fields" disabled aria-label="Your enquiry">
+    <label class="field">Your name<input name="name" autocomplete="name" maxlength="150" required /></label>
+    <label class="field">Email<input name="email" type="email" autocomplete="email" maxlength="200" required /></label>
+    {variant === 'full' && <label class="field">Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="50" /></label>}
+    <label class="field">Business<input name="business" autocomplete="organization" maxlength="200" /></label>
+    {variant === 'full'
+      ? <>
+          <label class="field full">Current website, if you have one<input name="url" type="url" inputmode="url" maxlength="300" placeholder="https://" /></label>
+          <fieldset class="choices full">
+            <legend>What do you need? Pick any that apply.</legend>
+            <div class="chips">
+              {services.map(service => <label class="chip"><input type="checkbox" name="services" value={service.enquiry} />{service.enquiry}</label>)}
+              <label class="chip"><input type="checkbox" name="services" value="Not sure yet" />Not sure yet</label>
+            </div>
+          </fieldset>
+          <label class="field">Budget<select name="budget">{budgets.map(budget => <option>{budget}</option>)}</select></label>
+          <label class="field">Timeline<select name="timeline">{timelines.map(timeline => <option>{timeline}</option>)}</select></label>
+        </>
+      : <label class="field">What do you need?<select name="services">{services.map(service => <option>{service.enquiry}</option>)}<option>Not sure yet</option></select></label>}
+    <label class="field full">About the project<textarea name="message" rows={variant === 'full' ? 5 : 4} maxlength="4000" required placeholder={variant === 'full' ? 'What are you trying to achieve?' : undefined}></textarea></label>
+    <div class="form-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="form-foot full">
+      <button class="button" type="submit">Send enquiry</button>
+      <small>We’ll only use your details to reply to you. See our <a href="/privacy">privacy policy</a>.</small>
+    </div>
+  </fieldset>
+  <noscript><p class="full muted">Please email your project details to <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>.</p></noscript>
+  <div class="form-status" data-status="sent" role="status" hidden tabindex="-1">
+    <p class="note note--accent">got it, thanks</p>
+    <h2>Enquiry sent.</h2>
+    <p class="muted">We’ll reply to your email within one business day.</p>
+  </div>
+  <div class="form-status" data-status="failed" role="alert" hidden>
+    <h2>We couldn’t send that just now.</h2>
+    <p class="muted">Your details are ready in an email draft instead.</p>
+    <a class="button button--outline" data-draft href={`mailto:${site.email}`}>Open your email draft</a>
+  </div>
+</form>
+
+<script>
+  import '../scripts/enquiry';
+</script>

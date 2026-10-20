@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy Policy" description="How JVDV Studio handles the details you send through the enquiry form.">
+  <article class="panel privacy">
+    <h1>Privacy policy</h1>
+    <p class="lead">This website collects as little as it can. Here’s what happens to the details you send us.</p>
+
+    <h2>What we collect</h2>
+    <p>When you send an enquiry, we receive what you type into the form: your name, email address and message, plus any optional details you add, such as your phone number, business, website, budget and timeline.</p>
+
+    <h2>How we use it</h2>
+    <p>We use your details only to reply to your enquiry and talk with you about your project. We don’t add you to a mailing list, and we never sell or share your details for marketing.</p>
+
+    <h2>Where it goes</h2>
+    <p>Enquiries are delivered to our inbox by email through Resend, our email delivery provider. The site is hosted on Cloudflare, which keeps standard server logs to protect the site from abuse. This site doesn’t use advertising or tracking cookies.</p>
+
+    <h2>Your choices</h2>
+    <p>You can ask to see, correct or delete the details you’ve sent us at any time by emailing <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  </article>
+</Base>
+
+<style>
+  .privacy { margin-top: 8px; display: flex; flex-direction: column; gap: 16px; max-width: 860px; }
+  .privacy h2 { font-size: 24px; letter-spacing: -0.02em; margin-top: 16px; }
+  .privacy p { color: var(--muted); max-width: 68ch; }
+</style>

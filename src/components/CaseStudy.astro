@@ -1,0 +1,99 @@
+---
+// Shared frame for case study pages: breadcrumb, intro panel with key facts, the services
+// involved and the "next case study" links at the end. The page supplies the story in between.
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Shot from './Shot.astro';
+import type { Screen } from '../data/projects';
+import { serviceBySlug } from '../data/services';
+import { site } from '../data/site';
+
+interface Props {
+  name: string;
+  // What it is, for the page title: "FIND Cards: Membership App Case Study".
+  kind: string;
+  intro: string;
+  description: string;
+  facts: { label: string; value: string; href?: string }[];
+  heroShot: string;
+  heroScreens?: Screen[];
+  heroScreen?: Screen;
+  // Wide screenshot for link previews; defaults to the hero screenshot.
+  ogScreen?: Screen;
+  // Slugs of the services this project used.
+  services: string[];
+  next: { name: string; href: string };
+  cta: { note: string; heading: string };
+}
+const { name, kind, intro, description, facts, heroShot, heroScreens, heroScreen, ogScreen = heroScreen, services, next, cta } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '');
+const og = ogScreen && await getImage({ src: ogScreen.image, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'jpeg', quality: 82 });
+const image = og && ogScreen ? { src: og.src, width: 1200, height: 630, alt: ogScreen.alt } : undefined;
+const used = services.map(slug => serviceBySlug(slug)!).filter(Boolean);
+const caseLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: `${name} case study`,
+  about: name,
+  description,
+  url: new URL(path, Astro.site!).href,
+  creator: { '@id': `${Astro.site!.href}#studio` },
+  ...(image ? { image: new URL(image.src, Astro.site!).href } : {}),
+};
+---
+<Base
+  title={`${name}: ${kind} Case Study | ${site.name}`}
+  description={description}
+  image={image}
+  breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'Work', href: '/work' }, { name, href: path }]}
+  jsonLd={[caseLd]}
+>
+  <p class="breadcrumb"><a href="/work">Work</a> / {name}</p>
+  <section class="panel case-intro">
+    <div class="case-intro__text">
+      <p class="note note--accent">case study</p>
+      <h1>{name}</h1>
+      <p class="lead">{intro}</p>
+    </div>
+    <dl class="facts">
+      {facts.map(fact => <div><dt>{fact.label}</dt><dd>{fact.href ? <a class="text-link" href={fact.href}>{fact.value}</a> : fact.value}</dd></div>)}
+    </dl>
+  </section>
+  <Shot label={heroShot} screens={heroScreens} screen={heroScreen} ratio="16 / 8" sizes="(max-width: 1320px) 94vw, 1240px" priority class="case-hero-shot" />
+
+  <slot />
+
+  {used.length > 0 && (
+    <section class="section case-services" aria-labelledby="case-services-heading">
+      <h2 id="case-services-heading">Services in this project</h2>
+      <ul>
+        {used.map(service => <li><a href={`/services/${service.slug}`}><span class="case-services__title">{service.title}</span><span class="muted">{service.summary}</span></a></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section class="section next" aria-label="Keep exploring">
+    <a class="next__case" href={next.href}>
+      <span class="dim" style="font-size: 14px">Next case study</span>
+      <span class="next__title">{next.name}</span>
+      <span class="text-link">Read the case study</span>
+    </a>
+    <div class="next__cta">
+      <p class="note">{cta.note}</p>
+      <p class="next__title">{cta.heading}</p>
+      <a class="button button--inverse" href="/contact">Book a free consult</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .case-intro { display: flex; flex-direction: column; gap: 40px; }
+  .case-intro__text { display: flex; flex-direction: column; gap: 20px; }
+  .case-intro h1 { font-size: clamp(44px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; }
+  .case-intro .lead { font-size: clamp(19px, 1.8vw, 23px); line-height: 1.45; max-width: 48ch; }
+  :global(.case-hero-shot) { margin-top: 20px; border-radius: 28px; }
+  .case-services h2 { font-size: clamp(28px, 3vw, 40px); margin-bottom: 24px; }
+  .case-services ul { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .case-services a { display: flex; flex-direction: column; gap: 6px; height: 100%; box-sizing: border-box; background: var(--panel); border-radius: 24px; padding: 28px; text-decoration: none; }
+  .case-services__title { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.02em; }
+</style>

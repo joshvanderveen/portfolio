@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Trusted from '../components/Trusted.astro';
+import Band from '../components/Band.astro';
+import { site } from '../data/site';
+
+const principles = [
+  { title: 'One team, start to finish', text: 'The people who scope your project design it, build it and support it. Nothing gets lost in a handover.' },
+  { title: 'Fixed quotes, clear scope', text: 'You know what you’re getting and what it costs before work starts. No surprise invoices.' },
+  { title: 'Built to last', text: 'Fast, accessible and secure by default, on technology that won’t need replacing next year.' },
+];
+const audiences = [
+  { title: 'Retailers', text: 'E-commerce stores and websites that turn browsers into buyers.' },
+  { title: 'Service businesses', text: 'Sites and booking tools that keep the phone ringing.' },
+  { title: 'Founders and platforms', text: 'Web and mobile products like FIND Cards and Trakkrr, from first version to growth.' },
+];
+const aboutLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `About ${site.name}`,
+  url: new URL('/about', Astro.site!).href,
+  about: { '@id': `${Astro.site!.href}#studio` },
+};
+---
+<Base
+  title="About JVDV Studio | Melbourne Web Design & Development"
+  description="JVDV Studio is a Melbourne web design and development studio founded by Josh Van Der Veen. We build websites, stores and apps, then host them and keep them improving."
+  breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'About', href: '/about' }]}
+  jsonLd={[aboutLd]}
+>
+  <section class="panel hero">
+    <div class="hero__main">
+      <p class="note note--accent">about the studio</p>
+      <h1 style="max-width: 16ch">A studio that sticks around after launch.</h1>
+    </div>
+    <p class="lead hero__side">{site.name} is a Melbourne web design and development studio. We build websites, stores and apps, then host them, look after them and keep making them better.</p>
+  </section>
+
+  <section class="section split" aria-labelledby="story-heading">
+    <div>
+      <h2 id="story-heading">Why the studio exists</h2>
+    </div>
+    <div class="about-copy">
+      <p>Too many businesses pay for a website or app, then watch it slowly fall out of date because the people who built it have moved on. Changes take weeks, nobody remembers how it works, and the next fix is a rebuild.</p>
+      <p>{site.name} was set up to work the other way. We design and build each project ourselves, host it, and stay on to look after it, so the people who know your website, store or app are the same people you call when you need something changed.</p>
+      <p>We’re based in Melbourne and work with businesses across Australia, from local service businesses and retailers to founders launching new platforms.</p>
+    </div>
+  </section>
+
+  <section class="section split" aria-labelledby="founder-heading">
+    <div>
+      <h2 id="founder-heading">Behind the studio</h2>
+      <p class="note note--accent">the founder</p>
+    </div>
+    <div class="about-copy">
+      <p>{site.name} was founded by {site.founder}, a Melbourne full-stack developer who has built mobile apps, web platforms and business websites for loyalty networks, fleet operators, real estate agents and photographers.</p>
+      <p>That range is the point: the studio covers design, front-end, back-end and hosting, so a project never stalls waiting on another supplier.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="principles-heading">
+    <h2 id="principles-heading" style="margin-bottom: 32px">How we like to work</h2>
+    <ul class="grid grid--tight">
+      {principles.map(item => <li class="tile" style="padding: 36px 32px"><h3 style="font-size: 24px">{item.title}</h3><p>{item.text}</p></li>)}
+    </ul>
+  </section>
+
+  <section class="section split" aria-labelledby="audience-heading">
+    <div>
+      <h2 id="audience-heading">Who we work with</h2>
+      <p class="note note--accent">big plans, small teams</p>
+    </div>
+    <div class="rows">
+      {audiences.map(item => <div><h3>{item.title}</h3><p>{item.text}</p></div>)}
+    </div>
+  </section>
+
+  <Trusted />
+
+  <Band note="say hello" heading="Let’s see if we’re a good fit." />
+</Base>
+
+<style>
+  .about-copy { display: flex; flex-direction: column; gap: 18px; max-width: 68ch; }
+  .about-copy p { color: var(--muted); font-size: 18px; }
+</style>

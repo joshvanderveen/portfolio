@@ -1,0 +1,32 @@
+---
+// An image slot. Shows one image, a row of phone screenshots, or, until real images are
+// supplied, an empty panel labelled during development so it's clear what belongs there.
+import { Image } from 'astro:assets';
+import type { Screen } from '../data/projects';
+
+interface Props {
+  label: string;
+  // One image, shown at its natural shape unless `ratio` is set.
+  screen?: Screen;
+  // Several phone screenshots side by side, cropped by the slot's ratio.
+  screens?: Screen[];
+  ratio?: string;
+  // Overrides the `sizes` hint for a single wide image, such as a full-width hero.
+  sizes?: string;
+  // Above the fold: load straight away instead of lazily.
+  priority?: boolean;
+  class?: string;
+}
+const { label, screen, screens, ratio, sizes, priority = false, class: className } = Astro.props;
+const loading = priority ? { loading: 'eager' as const, fetchpriority: 'high' as const } : { loading: 'lazy' as const };
+const style = ratio ? `--ratio: ${ratio}` : screen ? `--ratio: ${screen.image.width} / ${screen.image.height}` : undefined;
+// Wide images (desktop screenshots) fill more of the layout than phone screens.
+const wide = screen ? screen.image.width > screen.image.height : false;
+---
+{screens?.length
+  ? <div class:list={['shot', 'shot--phones', className]} style={style}>
+      {screens.map(item => <Image src={item.image} alt={item.alt} widths={[240, 360, 540]} sizes="(max-width: 700px) 30vw, 260px" class="phone" {...loading} />)}
+    </div>
+  : screen
+    ? <div class:list={['shot', className]} style={style}><Image src={screen.image} alt={screen.alt} widths={wide ? [640, 960, 1440, 2000] : [360, 540, 720]} sizes={sizes ?? (wide ? '(max-width: 700px) 90vw, 760px' : '(max-width: 700px) 90vw, 420px')} {...loading} /></div>
+    : <div class:list={['shot', className]} style={style} aria-hidden="true">{import.meta.env.DEV && `[${label}]`}</div>}

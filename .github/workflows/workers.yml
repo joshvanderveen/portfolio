@@ -1,0 +1,39 @@
+name: Deploy Workers
+# Deploys the enquiry Worker (worker/) and the www redirect Worker (redirect/) when their code
+# changes on main, or on demand from the Actions tab.
+on:
+  push:
+    branches: [main]
+    paths: ['worker/**', 'redirect/**', '.github/workflows/workers.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: workers
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Deploy enquiry Worker
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy --config worker/wrangler.jsonc
+      - name: Deploy www redirect Worker
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy --config redirect/wrangler.jsonc

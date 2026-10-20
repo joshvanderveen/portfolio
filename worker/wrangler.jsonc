@@ -1,0 +1,19 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "jvdv-enquiries",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "send_metrics": false,
+  // Same-origin endpoint for the website's enquiry forms. Needs the domain's zone on this Cloudflare account.
+  "routes": [{ "pattern": "joshvdv.com/api/enquiry", "zone_name": "joshvdv.com" }],
+  "workers_dev": false,
+  "observability": { "enabled": true },
+  "vars": {
+    "ENQUIRY_TO": "hello@joshvdv.com",
+    "ENQUIRY_BCC": "",
+    // The sending domain must be verified in Resend before this address works.
+    "ENQUIRY_FROM": "JVDV Studio website <enquiries@joshvdv.com>",
+    "ALLOWED_ORIGINS": "https://joshvdv.com,https://www.joshvdv.com"
+  }
+  // Secret: npx wrangler secret put RESEND_API_KEY --config worker/wrangler.jsonc
+}
