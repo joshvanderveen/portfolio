@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  // Sends www.joshvdv.com to the same path on joshvdv.com, so each page has one address.
+  "name": "jvdv-www-redirect",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "send_metrics": false,
+  "routes": [{ "pattern": "www.joshvdv.com", "custom_domain": true }],
+  "workers_dev": false
+}

@@ -9,7 +9,6 @@
   "workers_dev": false,
   "observability": { "enabled": true },
   "vars": {
-    // TODO: replace with the inbox enquiries should land in.
     "ENQUIRY_TO": "hello@joshvdv.com",
     "ENQUIRY_BCC": "",
     // The sending domain must be verified in Resend before this address works.

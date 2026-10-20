@@ -9,7 +9,8 @@ export default defineConfig({
   output: 'static',
   site: site.href,
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // Built CSS, scripts, fonts and images go in /assets/ rather than Astro's default /_astro/.
+  build: { format: 'file', assets: 'assets' },
   // Keep executable scripts external so the CSP can disallow inline code.
   vite: { build: { assetsInlineLimit: 0 } },
   devToolbar: { enabled: false },

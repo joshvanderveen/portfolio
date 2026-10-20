@@ -28,7 +28,7 @@ for (const file of files) {
   const fingerprint = [
     match(html, /<title>([^<]*)<\/title>/),
     match(html, /<meta name="description" content="([^"]*)"/),
-    main.replace(/\/_astro\/[^"' )]+/g, ''),
+    main.replace(/\/assets\/[^"' )]+/g, ''),
   ].join('\n');
   const hash = createHash('sha256').update(fingerprint).digest('hex').slice(0, 16);
   const previous = manifest[canonical];
