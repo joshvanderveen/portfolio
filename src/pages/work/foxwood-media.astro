@@ -49,7 +49,7 @@ const care = [
     </div>
   </section>
 
-  <section class="section grid grid--tight" style="--min: 300px" aria-label="Pages from the site">
+  <section class="section grid grid--tight swipe swipe--phones" style="--min: 300px" aria-label="Pages from the site" tabindex="0">
     {pages.map(page => <figure class="case-figure"><Shot label={page.label} screen={page.screen} /><figcaption>{page.caption}</figcaption></figure>)}
   </section>
 

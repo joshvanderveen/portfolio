@@ -35,6 +35,13 @@ const filters = categories.filter(category => all.some(project => (project.categ
   .filter { min-height: 44px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-size: 15px; cursor: pointer; }
   .filter[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .work-grid { padding-top: 24px; }
+  @media (max-width: 700px) {
+    /* One swipeable row of filters instead of wrapping onto two lines. */
+    .work-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding: 28px var(--gutter) 2px; }
+    .work-filters::-webkit-scrollbar { display: none; }
+    .filter { flex: none; }
+    .work-grid { padding-top: 16px; gap: 16px; }
+  }
   .work-empty { padding-top: 24px; }
 </style>
 

@@ -9,6 +9,6 @@ const current = (href: string) => path === href || path.startsWith(`${href}/`);
   <a class="brand" href="/" aria-label="JVDV Studio home">JVDV<span>.</span></a>
   <nav class="site-nav" aria-label="Main">
     {nav.map(item => <a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a>)}
-    <a class="button button--small" href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Book a call</a>
   </nav>
+  <a class="button button--small site-cta" href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Book a call</a>
 </header>
