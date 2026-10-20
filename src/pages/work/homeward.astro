@@ -1,0 +1,82 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import Shot from '../../components/Shot.astro';
+import { homewardScreens as app } from '../../data/projects';
+
+const screens = [
+  { label: 'Contact record', screen: app.contact, caption: 'One person can be selling, buying and leasing at once. Each plan is its own journey with its own stage and next step.' },
+  { label: 'Listings', screen: app.listings, caption: 'The agent’s own listings sit beside competitors’, with days on market and when each authority ends.' },
+];
+const details = [
+  { title: 'Runs on events', text: 'Moving a card, a sale or a date arriving triggers the follow-up, so nothing depends on memory.' },
+  { title: 'Lists the agent controls', text: 'Stages, sources, suburbs and other choices are data the agent edits, not settings a developer has to change.' },
+  { title: 'Ready for AI tools', text: 'An MCP server, the open standard AI tools use to connect to other software, lets those tools look up contacts, log calls and add tasks.' },
+];
+---
+<CaseStudy
+  name="Homeward"
+  kind="Real Estate CRM"
+  services={["web-apps", "hosting-maintenance"]}
+  intro="A CRM built around how a real estate agent actually works: one contact with many plans, and follow-ups that create themselves."
+  description="How JVDV Studio designed and built Homeward, a CRM for a Melbourne real estate agent with pipeline boards, automatic follow-ups and an MCP integration for AI tools."
+  facts={[
+    { label: 'Client', value: 'A Melbourne real estate agent' },
+    { label: 'Industry', value: 'Residential real estate' },
+    { label: 'What we did', value: 'Product design, web app, automations, MCP integration' },
+    { label: 'Platform', value: 'Web app' },
+  ]}
+  heroShot="Homeward seller pipeline"
+  heroScreen={app.board}
+  next={{ name: 'FIND Cards', href: '/work/find-cards' }}
+  cta={{ note: 'outgrown your spreadsheet?', heading: 'Let’s build the tool you need.' }}
+>
+  <section class="section case-columns">
+    <div>
+      <h2>The brief</h2>
+      <p class="muted">The agent’s old CRM stored each person once, with one label. But a vendor might also be buying, and later become a landlord, so the real picture lived in their head.</p>
+      <p class="muted">Follow-ups depended on memory too: lease renewals, authority expiries, “call back in 12 months”. The goal was a system that shows the whole pipeline at a glance and makes sure nobody falls through the cracks.</p>
+    </div>
+    <div>
+      <h2>What we built</h2>
+      <ul class="ticks">
+        <li>One contact, many journeys: seller, buyer, landlord and renter plans, each on its own pipeline board</li>
+        <li>A Today screen that lists what’s overdue, due today and coming up</li>
+        <li>Automatic tasks ahead of lease renewals and authority expiries</li>
+        <li>New listings that create a task to contact every matching buyer</li>
+        <li>A listings tracker covering competitors as well as the agent’s own</li>
+        <li>An MCP server, so AI tools can read and update the CRM</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="feature">
+      <div>
+        <p class="note note--accent">nothing slips</p>
+        <h2 style="font-size: clamp(28px, 3vw, 40px)">The day’s work, already sorted.</h2>
+        <p class="muted">Today pulls every call, follow-up and automatic task into one list, with leases and authorities ending soon on the side. Tasks the system created are marked, so the agent can see why each one is there.</p>
+      </div>
+      <Shot label="Today screen" screen={app.today} class="ui-shot" />
+    </div>
+  </section>
+
+  <section class="section grid grid--tight" style="--min: 480px" aria-label="Screens from Homeward">
+    {screens.map(item => <figure class="case-figure"><Shot label={item.label} screen={item.screen} class="ui-shot" /><figcaption>{item.caption}</figcaption></figure>)}
+  </section>
+
+  <section class="section" aria-labelledby="details-heading">
+    <h2 id="details-heading" style="font-size: clamp(28px, 3vw, 40px); margin-bottom: 28px">Built to grow with the business</h2>
+    <ul class="grid grid--tight" style="--min: 280px">
+      {details.map(item => <li class="tile"><h3 style="font-size: 21px">{item.title}</h3><p>{item.text}</p></li>)}
+    </ul>
+  </section>
+</CaseStudy>
+
+<style>
+  .case-columns { display: flex; flex-wrap: wrap; gap: 40px 64px; }
+  .case-columns > div { flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px; }
+  .case-columns h2 { font-size: clamp(28px, 3vw, 40px); }
+  .case-figure { display: flex; flex-direction: column; gap: 12px; }
+  .case-figure figcaption { font-size: 15px; color: var(--muted); }
+  :global(.ui-shot) { border-radius: 14px; }
+</style>

@@ -11,9 +11,8 @@
     "not_found_handling": "404-page"
   },
   // Wrangler replaces the Worker's domains with this list on every deploy, so keep it complete.
-  "routes": [
-    { "pattern": "joshvdv.com", "custom_domain": true },
-    { "pattern": "www.joshvdv.com", "custom_domain": true }
-  ],
+  // www.joshvdv.com is left off on purpose: it already 301-redirects to the apex, which keeps
+  // one address per page for search engines.
+  "routes": [{ "pattern": "joshvdv.com", "custom_domain": true }],
   "workers_dev": true
 }

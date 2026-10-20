@@ -1,7 +1,11 @@
 ---
 import { site } from '../data/site';
+import { services } from '../data/services';
 ---
 <footer class="site-footer">
+  <nav class="site-footer__services" aria-label="Services">
+    {services.map(service => <a href={`/services/${service.slug}`}>{service.title}</a>)}
+  </nav>
   <span>{site.name}, Melbourne{site.abn && ` · ABN ${site.abn}`}</span>
   <nav aria-label="Footer">
     <a href={`mailto:${site.email}`}>{site.email}</a>

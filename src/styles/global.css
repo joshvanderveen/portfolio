@@ -77,6 +77,8 @@
   .site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-block: 24px 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
   .site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
   .site-footer a { text-decoration: none; }
+  .site-footer__services { flex: 1 1 100%; padding-bottom: 16px; margin-bottom: 4px; border-bottom: 1px solid var(--line); color: var(--muted); }
+  .card--text { padding-top: 32px; }
 
   /* Buttons and links */
   .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 14px 24px; border-radius: 999px; border: 0; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; cursor: pointer; }
@@ -103,7 +105,8 @@
   .tile p { color: var(--muted); }
 
   .shot { aspect-ratio: var(--ratio, 16 / 11); background: var(--panel-2); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 14px; overflow: hidden; }
-  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  /* Screenshots crop from the bottom, keeping a page's header in view. */
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .shot--phones { align-items: flex-start; gap: 4%; padding-top: 7%; }
   .shot--phones .phone { width: min(28%, 260px); height: auto; border-radius: 16px; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08); }
 
@@ -165,7 +168,7 @@
   .form-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
   .form-foot small { font-size: 14px; color: var(--dim); }
   .form-status { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 12px; padding-block: 24px; }
-  .form-status h3 { font-size: clamp(26px, 2.6vw, 36px); }
+  .form-status h2 { font-size: clamp(26px, 2.6vw, 36px); }
 
   .breadcrumb { margin: 16px 0 20px; font-size: 15px; color: var(--dim); }
   .breadcrumb a { color: var(--muted); }

@@ -6,32 +6,68 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { services } from '../data/services';
 
 interface Props {
+  // Page titles that don't already name the studio get " | JVDV Studio" added.
   title: string;
   description?: string;
   noindex?: boolean;
+  // Social preview image: a path on this site, with its size and description.
+  image?: { src: string; width: number; height: number; alt: string };
+  // Breadcrumb trail for structured data, ending with the current page.
+  breadcrumbs?: { name: string; href: string }[];
   jsonLd?: object[];
 }
-const { title, description = site.description, noindex = false, jsonLd = [] } = Astro.props;
-const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
+const {
+  title,
+  description = site.description,
+  noindex = false,
+  image = { src: '/og.png', width: 1200, height: 630, alt: `${site.name}: web design and app development in Melbourne` },
+  breadcrumbs,
+  jsonLd = [],
+} = Astro.props;
+const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const summary = description.replace(/\s+/g, ' ').trim();
 const pageDescription = summary.length > 160 ? `${summary.slice(0, 157).replace(/\s+\S*$/, '')}…` : summary;
 // File output exposes .html in Astro.url at build time; the Worker serves clean URLs.
 const pathname = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(pathname, Astro.site!);
+const socialImage = new URL(image.src, Astro.site!);
+const home = Astro.site!.href;
+
 const organization = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
+  '@id': `${home}#studio`,
   name: site.name,
+  alternateName: site.shortName,
   description: site.description,
-  url: Astro.site!.href,
+  url: home,
   email: site.email,
   ...(site.phone ? { telephone: site.phone } : {}),
+  logo: new URL('/icon-512.png', home).href,
+  image: new URL('/og.png', home).href,
+  founder: { '@type': 'Person', name: site.founder, sameAs: [site.linkedin, site.github] },
   address: { '@type': 'PostalAddress', addressLocality: 'Melbourne', addressRegion: 'VIC', addressCountry: 'AU' },
-  areaServed: 'AU',
+  areaServed: [
+    { '@type': 'City', name: 'Melbourne' },
+    { '@type': 'Country', name: 'Australia' },
+  ],
+  knowsAbout: services.map(service => service.title),
   sameAs: [site.linkedin, site.github],
 };
+const breadcrumbLd = breadcrumbs && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.name,
+    item: new URL(crumb.href, home).href,
+  })),
+};
+const structured = [organization, ...(breadcrumbLd ? [breadcrumbLd] : []), ...jsonLd];
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -40,10 +76,12 @@ const organization = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <meta name="theme-color" content="#000000" />
     {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_AU" />
@@ -51,8 +89,16 @@ const organization = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
-    {[organization, ...jsonLd].map(data => <script is:inline type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />)}
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={image.alt} />
+    {structured.map(data => <script is:inline type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

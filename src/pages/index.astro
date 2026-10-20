@@ -6,20 +6,33 @@ import ProjectCard from '../components/ProjectCard.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../data/site';
 import { services } from '../data/services';
-import { projects } from '../data/projects';
+import { projects, findCardsScreens } from '../data/projects';
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  alternateName: site.shortName,
+  url: Astro.site!.href,
+  publisher: { '@id': `${Astro.site!.href}#studio` },
+};
 ---
-<Base title={site.name} description="Melbourne design and development studio. We design, build and look after websites, e-commerce stores and apps for businesses that want results they can measure.">
+<Base
+  title="Web Design & App Development in Melbourne | JVDV Studio"
+  description="JVDV Studio is a Melbourne web design and app development studio. We design, build and look after websites, Shopify stores and apps for businesses that want results."
+  jsonLd={[websiteLd]}
+>
   <section class="panel hero" style="align-items: center; gap: 48px">
     <div class="hero__main" style="gap: 28px">
       <p class="note note--accent">Melbourne design and development studio</p>
       <h1 style="font-size: clamp(40px, 5.4vw, 76px); max-width: 15ch">Websites and apps that pull their weight.</h1>
-      <p class="lead">We design, build and look after websites, e-commerce stores and apps for businesses that want results they can measure.</p>
+      <p class="lead">{site.name} is a web design and app development studio in Melbourne. We design, build and look after websites, e-commerce stores and apps for businesses that want results they can measure.</p>
       <div class="actions">
         <a class="button" href="/contact">Book a free consult</a>
         <a class="button button--outline" href="/work">See our work</a>
       </div>
     </div>
-    <Shot label="Hero visual: product screens collage" ratio="1 / 1" class="home-hero-shot" />
+    <Shot label="FIND Cards app screens" screens={[findCardsScreens.home, findCardsScreens.deal, findCardsScreens.map]} ratio="1 / 1" priority class="home-hero-shot" />
   </section>
 
   <Trusted />
@@ -30,8 +43,8 @@ import { projects } from '../data/projects';
       <a class="muted" href="/work">All case studies</a>
     </div>
     <div class="grid" style="--min: 480px">
-      <ProjectCard project={projects.findCards} />
-      <ProjectCard project={projects.trakkrr} />
+      <ProjectCard project={projects.homeward} />
+      <ProjectCard project={projects.foxwood} />
     </div>
   </section>
 
@@ -41,7 +54,7 @@ import { projects } from '../data/projects';
       <p class="muted">Strategy, design, development and support from one team, so nothing falls between suppliers.</p>
     </div>
     <ul class="grid grid--tight">
-      {services.map(service => <li class="tile"><h3><a href={`/services#${service.id}`} style="text-decoration: none">{service.title}</a></h3><p>{service.summary}</p></li>)}
+      {services.map(service => <li class="tile"><h3><a href={`/services/${service.slug}`} style="text-decoration: none">{service.title}</a></h3><p>{service.summary}</p></li>)}
     </ul>
   </section>
 
@@ -50,7 +63,7 @@ import { projects } from '../data/projects';
       <p style="flex: 3 1 520px; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.12; letter-spacing: -0.03em">We don’t launch and leave. We host what we build, look after it and keep improving it.</p>
       <div style="flex: 2 1 300px; gap: 12px">
         <p class="note">from the studio</p>
-        <p style="max-width: 44ch">JVDV is a Melbourne design and development studio working with retailers, service businesses and platforms across Australia.</p>
+        <p style="max-width: 44ch">{site.name} works with retailers, service businesses and platform founders across Australia. <a href="/about" style="font-weight: 600">More about the studio</a></p>
       </div>
     </div>
   </section>

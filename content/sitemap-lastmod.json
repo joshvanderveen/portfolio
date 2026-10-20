@@ -1,34 +1,62 @@
 {
   "https://joshvdv.com/about": {
     "lastmod": "2026-10-20",
-    "hash": "d8d34b4b8559d20c"
+    "hash": "2552e479a1e05c19"
   },
   "https://joshvdv.com/contact": {
     "lastmod": "2026-10-20",
-    "hash": "05d675567ab81077"
+    "hash": "7aec9c82f2b20fb1"
   },
   "https://joshvdv.com/": {
     "lastmod": "2026-10-20",
-    "hash": "c7037fb86ef3003c"
+    "hash": "e4a3dda8a688341c"
   },
   "https://joshvdv.com/privacy": {
     "lastmod": "2026-10-20",
-    "hash": "38c917296e42db31"
+    "hash": "b3f1747b0abb6751"
   },
   "https://joshvdv.com/services": {
     "lastmod": "2026-10-20",
-    "hash": "758c384320e72333"
+    "hash": "7a6b37918586feb5"
+  },
+  "https://joshvdv.com/services/e-commerce": {
+    "lastmod": "2026-10-20",
+    "hash": "096e66eed9a2b27e"
+  },
+  "https://joshvdv.com/services/hosting-maintenance": {
+    "lastmod": "2026-10-20",
+    "hash": "79b8a145515e552b"
+  },
+  "https://joshvdv.com/services/mobile-apps": {
+    "lastmod": "2026-10-20",
+    "hash": "5480a16970b4857b"
+  },
+  "https://joshvdv.com/services/seo": {
+    "lastmod": "2026-10-20",
+    "hash": "60f2f4ea17627f7c"
+  },
+  "https://joshvdv.com/services/web-apps": {
+    "lastmod": "2026-10-20",
+    "hash": "c2f70960c6759f3f"
+  },
+  "https://joshvdv.com/services/web-design": {
+    "lastmod": "2026-10-20",
+    "hash": "6d5e454abbac78b9"
   },
   "https://joshvdv.com/work": {
     "lastmod": "2026-10-20",
-    "hash": "46b35e95d9f57782"
+    "hash": "ab9e07e1633dc787"
   },
   "https://joshvdv.com/work/find-cards": {
     "lastmod": "2026-10-20",
-    "hash": "01b4f646df5f1a9c"
+    "hash": "074b3b604ec417a6"
   },
   "https://joshvdv.com/work/foxwood-media": {
     "lastmod": "2026-10-20",
-    "hash": "6e8bb9cb5f902fa7"
+    "hash": "250c5692294a4942"
+  },
+  "https://joshvdv.com/work/homeward": {
+    "lastmod": "2026-10-20",
+    "hash": "49b438fc237e8f39"
   }
 }

@@ -1,12 +1,15 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { services } from '../src/data/services';
 
 const pages = [
   { path: '/', h1: 'Websites and apps that pull their weight.' },
   { path: '/work', h1: 'Work that earns its keep.' },
   { path: '/work/find-cards', h1: 'FIND Cards' },
   { path: '/work/foxwood-media', h1: 'Foxwood Media' },
+  { path: '/work/homeward', h1: 'Homeward' },
   { path: '/services', h1: 'Everything your business needs online.' },
+  ...services.map(service => ({ path: `/services/${service.slug}`, h1: service.page.h1 })),
   { path: '/about', h1: 'A studio that sticks around after launch.' },
   { path: '/contact', h1: 'Let’s talk about your project.' },
   { path: '/privacy', h1: 'Privacy policy' },
@@ -46,6 +49,8 @@ test('navigation marks the current page and reaches every section', async ({ pag
   await expect(page).toHaveURL(/\/work\/foxwood-media$/);
   // Case studies sit under Work in the menu.
   await expect(nav.getByRole('link', { name: 'Work' })).toHaveAttribute('aria-current', 'page');
+  await page.locator('main a[href="/work/homeward"]').filter({ hasText: 'Next case study' }).click();
+  await expect(page).toHaveURL(/\/work\/homeward$/);
   await page.locator('main a[href="/work/find-cards"]').filter({ hasText: 'Next case study' }).click();
   await expect(page).toHaveURL(/\/work\/find-cards$/);
   await nav.getByRole('link', { name: 'Book a call' }).click();
@@ -55,15 +60,17 @@ test('navigation marks the current page and reaches every section', async ({ pag
 test('work filters show only matching projects', async ({ page }) => {
   await page.goto('/work');
   const cards = page.locator('.work-grid .card');
-  await expect(cards).toHaveCount(3);
+  await expect(cards).toHaveCount(4);
   await page.getByRole('button', { name: 'Mobile apps' }).click();
   await expect(page.getByRole('button', { name: 'Mobile apps' })).toHaveAttribute('aria-pressed', 'true');
   await expect(cards.filter({ visible: true })).toHaveCount(1);
   await expect(cards.filter({ visible: true })).toContainText('FIND Cards');
   await page.getByRole('button', { name: 'Websites' }).click();
   await expect(cards.filter({ visible: true })).toHaveCount(2);
-  await page.getByRole('button', { name: 'All work' }).click();
+  await page.getByRole('button', { name: 'Web apps' }).click();
   await expect(cards.filter({ visible: true })).toHaveCount(3);
+  await page.getByRole('button', { name: 'All work' }).click();
+  await expect(cards.filter({ visible: true })).toHaveCount(4);
 });
 
 test('home enquiry form sends to the enquiry endpoint', async ({ page }) => {
@@ -132,8 +139,25 @@ test('the Worker serves headers, metadata, sitemap and real 404s', async ({ requ
   const html = await home.text();
   expect(new URL(html.match(/rel="canonical" href="([^"]+)"/)![1]).pathname).toBe('/');
   expect(html).toContain('"@type":"ProfessionalService"');
-  const services = await (await request.get('/services')).text();
-  expect(services).toContain('"@type":"FAQPage"');
+  expect(html).toContain('"founder":{"@type":"Person","name":"Josh Van Der Veen"');
+  expect(await (await request.get('/services')).text()).toContain('"@type":"FAQPage"');
+
+  // Every indexable page has a unique, studio-named title, a social image that exists,
+  // and pages below the top level carry breadcrumb data.
+  const titles = new Set<string>();
+  for (const { path } of pages) {
+    const page = await (await request.get(path)).text();
+    const title = page.match(/<title>([^<]*)<\/title>/)![1];
+    expect(title, path).toContain('JVDV Studio');
+    expect(titles.has(title), `duplicate title ${title}`).toBe(false);
+    titles.add(title);
+    const image = new URL(page.match(/property="og:image" content="([^"]+)"/)![1]);
+    expect((await request.get(image.pathname)).status(), `${path} og:image`).toBe(200);
+    if (path.split('/').length > 2) expect(page, path).toContain('"@type":"BreadcrumbList"');
+  }
+  const service = await (await request.get(`/services/${services[0].slug}`)).text();
+  expect(service).toContain('"@type":"Service"');
+  expect(await (await request.get('/work/homeward')).text()).toContain('"@type":"CreativeWork"');
 
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap.match(/<loc>/g)).toHaveLength(pages.length);

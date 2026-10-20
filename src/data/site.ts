@@ -1,7 +1,9 @@
 // Business details used across the site. Empty optional values are left off the page.
 export const site = {
-  name: 'JVDV',
-  description: 'JVDV is a Melbourne design and development studio. We design, build and look after websites, e-commerce stores and apps for businesses across Australia.',
+  name: 'JVDV Studio',
+  shortName: 'JVDV',
+  description: 'JVDV Studio is a Melbourne web design and development studio. We design, build and look after websites, e-commerce stores and apps for businesses across Australia.',
+  founder: 'Josh Van Der Veen',
   // TODO: replace with the inbox you want enquiries and email links to use.
   email: 'hello@joshvdv.com',
   phone: '',

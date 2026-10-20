@@ -8,7 +8,7 @@ const all = Object.values(projects);
 // Only offer filters that match at least one project.
 const filters = categories.filter(category => all.some(project => (project.categories as string[]).includes(category.id)));
 ---
-<Base title="Work" description="Platforms, apps and websites JVDV has designed, built and still looks after, including FIND Cards, Trakkrr and Foxwood Media.">
+<Base title="Our Work: Websites, Apps & Platforms | JVDV Studio" description="Case studies from JVDV Studio, a Melbourne web design and development studio: FIND Cards, Homeward, Foxwood Media and Trakkrr." breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'Work', href: '/work' }]}>
   <section class="panel hero">
     <div class="hero__main">
       <p class="note note--accent">things we’ve made</p>

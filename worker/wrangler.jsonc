@@ -13,7 +13,7 @@
     "ENQUIRY_TO": "hello@joshvdv.com",
     "ENQUIRY_BCC": "",
     // The sending domain must be verified in Resend before this address works.
-    "ENQUIRY_FROM": "JVDV website <enquiries@joshvdv.com>",
+    "ENQUIRY_FROM": "JVDV Studio website <enquiries@joshvdv.com>",
     "ALLOWED_ORIGINS": "https://joshvdv.com,https://www.joshvdv.com"
   }
   // Secret: npx wrangler secret put RESEND_API_KEY --config worker/wrangler.jsonc

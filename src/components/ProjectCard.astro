@@ -7,9 +7,11 @@ interface Props {
   heading?: 'h2' | 'h3';
 }
 const { project, heading: Heading = 'h3' } = Astro.props;
+// Projects without screenshots yet show as text-only cards rather than an empty panel.
+const hasImage = Boolean(project.screens?.length || project.cover);
 ---
-<article class="card" data-categories={project.categories.join(' ')}>
-  <Shot label={project.shot} screens={project.screens} screen={project.cover} ratio="16 / 11" />
+<article class:list={['card', { 'card--text': !hasImage }]} data-categories={project.categories.join(' ')}>
+  {hasImage && <Shot label={project.shot} screens={project.screens} screen={project.cover} ratio="16 / 11" />}
   <div class="card__body">
     <Heading>{project.name}</Heading>
     <p class="muted">{project.summary}</p>

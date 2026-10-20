@@ -39,11 +39,11 @@ const id = `enquiry-${variant}`;
   <noscript><p class="full muted">Please email your project details to <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>.</p></noscript>
   <div class="form-status" data-status="sent" role="status" hidden tabindex="-1">
     <p class="note note--accent">got it, thanks</p>
-    <h3>Enquiry sent.</h3>
+    <h2>Enquiry sent.</h2>
     <p class="muted">We’ll reply to your email within one business day.</p>
   </div>
   <div class="form-status" data-status="failed" role="alert" hidden>
-    <h3>We couldn’t send that just now.</h3>
+    <h2>We couldn’t send that just now.</h2>
     <p class="muted">Your details are ready in an email draft instead.</p>
     <a class="button button--outline" data-draft href={`mailto:${site.email}`}>Open your email draft</a>
   </div>

@@ -11,6 +11,10 @@ import fwStory from '../assets/work/foxwood-media/story-desktop.jpg';
 import fwGallery from '../assets/work/foxwood-media/gallery-mobile.jpg';
 import fwWedding from '../assets/work/foxwood-media/wedding-mobile.jpg';
 import fwEnquire from '../assets/work/foxwood-media/enquire-mobile.jpg';
+import hwToday from '../assets/work/homeward/today.png';
+import hwBoard from '../assets/work/homeward/seller-board.png';
+import hwContact from '../assets/work/homeward/contact.png';
+import hwListings from '../assets/work/homeward/listings.png';
 
 export type Category = 'websites' | 'web-apps' | 'mobile-apps' | 'e-commerce' | 'seo';
 
@@ -37,6 +41,14 @@ export const foxwoodScreens = {
   gallery: { image: fwGallery, alt: 'Foxwood Media’s stories gallery on a phone, opening with Caleb & Hannah’s wedding' },
   wedding: { image: fwWedding, alt: 'Foxwood Media’s Melbourne wedding photography service page on a phone' },
   enquire: { image: fwEnquire, alt: 'Foxwood Media’s enquiry form on a phone, starting with “It starts with your story”' },
+} satisfies Record<string, Screen>;
+
+// Screenshots of Homeward running locally on made-up demo data.
+export const homewardScreens = {
+  today: { image: hwToday, alt: 'Homeward’s Today screen: overdue calls and follow-ups, automatic tasks for new listings and lease ends, and authorities and leases coming up' },
+  board: { image: hwBoard, alt: 'Homeward’s seller pipeline board, with sellers grouped from 6–12 months out to listed, each card showing temperature, address and next task' },
+  contact: { image: hwContact, alt: 'A Homeward contact record with three open journeys for one person: landlord, buyer and seller' },
+  listings: { image: hwListings, alt: 'Homeward’s listings table of the agency’s own and competitors’ listings, with price guide, status, days on market and authority end' },
 } satisfies Record<string, Screen>;
 
 export interface Project {
@@ -86,5 +98,14 @@ export const projects = {
     shot: 'Foxwood Media homepage',
     cover: foxwoodScreens.card,
     href: '/work/foxwood-media',
+  },
+  homeward: {
+    name: 'Homeward',
+    summary: 'A CRM built for a Melbourne real estate agent. Every contact’s selling, buying and leasing plans sit on their own pipeline, and the follow-ups create themselves.',
+    tags: ['Web app', 'MCP integration'],
+    categories: ['web-apps'],
+    shot: 'Homeward seller pipeline',
+    cover: homewardScreens.board,
+    href: '/work/homeward',
   },
 } satisfies Record<string, Project>;
