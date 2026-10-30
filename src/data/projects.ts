@@ -16,7 +16,7 @@ import hwBoard from '../assets/work/homeward/seller-board.png';
 import hwContact from '../assets/work/homeward/contact.png';
 import hwListings from '../assets/work/homeward/listings.png';
 
-export type Category = 'websites' | 'web-apps' | 'mobile-apps' | 'e-commerce' | 'seo';
+export type Category = 'websites' | 'web-apps' | 'mobile-apps' | 'e-commerce';
 
 export interface Screen {
   image: ImageMetadata;
@@ -70,7 +70,6 @@ export const categories: { id: Category; label: string }[] = [
   { id: 'web-apps', label: 'Web apps' },
   { id: 'mobile-apps', label: 'Mobile apps' },
   { id: 'e-commerce', label: 'E-Commerce' },
-  { id: 'seo', label: 'SEO' },
 ];
 
 export const projects = {
@@ -94,7 +93,7 @@ export const projects = {
     name: 'Foxwood Media',
     summary: 'A website for a Melbourne wedding and family photography team that they update themselves.',
     tags: ['Website', 'SEO', 'Hosting'],
-    categories: ['websites', 'seo'],
+    categories: ['websites'],
     shot: 'Foxwood Media homepage',
     cover: foxwoodScreens.card,
     href: '/work/foxwood-media',

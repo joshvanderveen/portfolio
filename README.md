@@ -20,7 +20,7 @@ There is no CMS; content lives in code.
 | File | Purpose |
 | --- | --- |
 | `src/data/site.ts` | Business name, email, phone, ABN, social links, menu, client list and contact form options. Empty phone or ABN values are left off the site |
-| `src/data/services.ts` | The six services, the home page service cards, the project steps and the FAQs |
+| `src/data/services.ts` | The five services, the home page service cards, the project steps and the FAQs |
 | `src/data/projects.ts` | Projects shown on the home and Work pages, with their tags and filter categories |
 | `src/pages/work/*.astro` | Case studies (`CaseStudy.astro` provides the shared frame) |
 | `src/styles/global.css` | Colours, fonts and shared components |
