@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
-import { site } from '../data/site';
+import { site, phoneHref } from '../data/site';
 
 const next = [
   { title: 'We reply', text: 'within one business day to set up a call.' },
@@ -30,10 +30,11 @@ const next = [
         </ol>
       </div>
       <div class="tile">
-        <h2>Prefer to reach out directly?</h2>
+        <h2>Prefer direct?</h2>
+        <p class="muted">Skip the form and reach us straight away.</p>
         <dl class="contact-list">
           <dt>Email</dt><dd><a class="text-link" href={`mailto:${site.email}`}>{site.email}</a></dd>
-          {site.phone && <><dt>Phone</dt><dd><a href={`tel:${site.phone.replace(/\s+/g, '')}`}>{site.phone}</a></dd></>}
+          {site.phone && <><dt>Phone</dt><dd><a class="text-link" href={phoneHref}>{site.phone}</a></dd></>}
           <dt>Based in</dt><dd>{site.location}</dd>
           <dt>Elsewhere</dt><dd><a href={site.linkedin}>LinkedIn</a> and <a href={site.github}>GitHub</a></dd>
         </dl>

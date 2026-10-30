@@ -5,12 +5,15 @@ export const site = {
   description: 'JVDV Studio is a Melbourne web design and development studio. We design, build and look after websites, e-commerce stores and apps for businesses across Australia.',
   founder: 'Josh Van Der Veen',
   email: 'hello@joshvdv.com',
-  phone: '',
+  phone: '0444 529 866',
   abn: '',
   location: 'Melbourne, Victoria',
   linkedin: 'https://www.linkedin.com/in/josh-van-der-veen',
   github: 'https://github.com/joshvanderveen',
 };
+
+// The phone number as a tel: link in international form (0444 529 866 becomes tel:+61444529866).
+export const phoneHref = site.phone ? `tel:+61${site.phone.replace(/\s+/g, '').replace(/^0/, '')}` : '';
 
 export const nav = [
   { href: '/work', label: 'Work' },

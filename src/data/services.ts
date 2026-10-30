@@ -265,6 +265,16 @@ export const services: Service[] = [
 
 export const serviceBySlug = (slug: string) => services.find(service => service.slug === slug);
 
+// The six cards on the home page. Cards with a matching service page link to it.
+export const homeServices: { title: string; text: string; href?: string }[] = [
+  { title: 'Website design and build', text: 'Fast, mobile-friendly sites that look sharp and turn visitors into enquiries.', href: '/services/web-design' },
+  { title: 'Custom web apps', text: 'Booking systems, client portals, CRMs and referral tools built around how you work.', href: '/services/web-apps' },
+  { title: 'Content you can edit', text: 'Easy editing so you can update text, photos and stories yourself without calling us.' },
+  { title: 'Hosting, care and monitoring', text: 'We keep your site fast, secure and up to date, and we fix problems before you notice them.', href: '/services/hosting-maintenance' },
+  { title: 'SEO foundations', text: 'Clean code, proper page titles and share images, and fast load times so Google and your customers can find you.', href: '/services/seo' },
+  { title: 'Ongoing improvements', text: 'New pages, features and tweaks as your business grows.' },
+];
+
 export const steps = [
   { title: 'Free consult', text: 'We learn your goals, then send a clear scope and a fixed quote.' },
   { title: 'Design', text: 'You review real pages, not mood boards, and we refine them together.' },
