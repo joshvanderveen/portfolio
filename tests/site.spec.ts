@@ -126,17 +126,17 @@ test('contact form sends every detail and offers an email draft when sending fai
   await form.getByLabel('Email').fill('sam@example.com');
   await form.getByLabel('Phone (optional)').fill('0400 000 000');
   await form.getByText('Website', { exact: true }).click();
-  await form.getByText('SEO', { exact: true }).click();
+  await form.getByText('Hosting and maintenance', { exact: true }).click();
   await form.getByLabel('Budget').selectOption('$5k to $15k');
-  await form.getByLabel('About the project').fill('A site and some SEO help.');
+  await form.getByLabel('About the project').fill('A site and some hosting help.');
   await form.getByRole('button', { name: 'Send enquiry' }).click();
   const draft = form.getByRole('link', { name: 'Open your email draft' });
   await expect(draft).toBeVisible();
-  expect(payload).toMatchObject({ name: 'Sam Taylor', phone: '0400 000 000', services: 'Website, SEO', budget: '$5k to $15k' });
+  expect(payload).toMatchObject({ name: 'Sam Taylor', phone: '0400 000 000', services: 'Website, Hosting and maintenance', budget: '$5k to $15k' });
   const href = decodeURIComponent((await draft.getAttribute('href'))!);
   expect(href).toMatch(/^mailto:[^?]+\?subject=Website enquiry - Sam Taylor&body=/);
-  expect(href).toContain('Needs: Website, SEO');
-  expect(href).toContain('A site and some SEO help.');
+  expect(href).toContain('Needs: Website, Hosting and maintenance');
+  expect(href).toContain('A site and some hosting help.');
   // The form stays filled in so the visitor can try again.
   await expect(form.getByLabel('Your name')).toHaveValue('Sam Taylor');
 });
@@ -182,6 +182,11 @@ test('the Worker serves headers, metadata, sitemap and real 404s', async ({ requ
   expect(sitemap.match(/<loc>/g)).toHaveLength(pages.length);
   expect(sitemap).not.toContain('/404');
   expect(await (await request.get('/robots.txt')).text()).toContain('Sitemap: ');
+
+  // The retired SEO page sends people to web design.
+  const moved = await request.get('/services/seo', { maxRedirects: 0 });
+  expect(moved.status()).toBe(301);
+  expect(moved.headers()['location']).toContain('/services/web-design');
 
   const missing = await request.get('/no-such-page');
   expect(missing.status()).toBe(404);
