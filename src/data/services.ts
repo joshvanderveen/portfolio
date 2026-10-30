@@ -212,7 +212,7 @@ export const services: Service[] = [
         { title: 'Check-ins and advice', text: 'A regular look at speed, security, search health and what could work harder for you.' },
       ],
       audience: [
-        'Businesses we’ve built a website, store or app for',
+        'Businesses we’ve built a website or app for',
         'Owners whose current developer has moved on',
         'Sites that are slow or haven’t been updated in years',
         'Teams that want changes made without a quote each time',
