@@ -37,8 +37,8 @@ export const services: Service[] = [
     enquiry: 'Website',
     page: {
       seoTitle: 'Custom Web Design Agency Melbourne | JVDV Studio',
-      metaDescription: 'Custom website design and development from a Melbourne web design agency. Fast, accessible sites your team can update, built for search and looked after by JVDV Studio.',
-      h1: 'Website design and development in Melbourne',
+      metaDescription: 'Custom website design and build from a Melbourne web design agency. Fast sites your team can update, built for search and cared for after launch.',
+      h1: 'Custom website design and build in Melbourne',
       lead: 'Custom websites that load fast, rank well and turn visitors into enquiries, designed around how your customers actually decide.',
       intro: [
         'Your website is often the first conversation a customer has with your business. We design it around the questions people ask before they get in touch, then build it to be fast on every device and easy for your team to keep up to date.',
@@ -70,16 +70,16 @@ export const services: Service[] = [
   },
   {
     slug: 'e-commerce',
-    title: 'E-Commerce stores',
+    title: 'Shopify and e-commerce stores',
     summary: 'New stores, migrations and custom themes designed to convert.',
     description: 'Shopify stores, migrations and custom themes that make your products look their best and make checkout effortless.',
     included: ['Store setup or migration from another platform', 'Custom theme design and development', 'Payments, shipping and apps configured', 'Product and collection page optimisation'],
     cta: 'Start a store project',
     enquiry: 'E-Commerce store',
     page: {
-      seoTitle: 'Shopify Developer Melbourne | Hire a Shopify Expert | JVDV Studio',
-      metaDescription: 'Hire a Shopify developer in Melbourne. JVDV Studio designs, builds and migrates Shopify stores for Australian businesses, with custom themes, smooth checkout and support after launch.',
-      h1: 'Shopify development and e-commerce stores',
+      seoTitle: 'Shopify Developer Melbourne | JVDV Studio',
+      metaDescription: 'Hire a Shopify developer in Melbourne. JVDV Studio builds, migrates and looks after Shopify stores for Australian businesses, custom themes included.',
+      h1: 'Shopify developer for stores that sell',
       lead: 'Online stores that show your products at their best and make buying easy, from a new Shopify store to moving off an old platform.',
       intro: [
         'A good store does two jobs: it makes customers want the product, and it gets out of the way when they’re ready to buy. We design product and collection pages that sell, and set up payments, shipping and stock so orders run smoothly behind the scenes.',
@@ -118,7 +118,7 @@ export const services: Service[] = [
     enquiry: 'Web app',
     page: {
       seoTitle: 'Custom Web App Development Melbourne | JVDV Studio',
-      metaDescription: 'Custom web applications, client portals and dashboards for Australian businesses, designed around your workflow and built by a Melbourne studio.',
+      metaDescription: 'Custom web applications, client portals and dashboards for Australian businesses, designed around your workflow and built by a Melbourne agency.',
       h1: 'Custom web app development',
       lead: 'Platforms, portals and internal tools built around the way your business actually runs, not the other way around.',
       intro: [
@@ -196,7 +196,7 @@ export const services: Service[] = [
     enquiry: 'Hosting and maintenance',
     page: {
       seoTitle: 'Website Hosting & Maintenance Plans | JVDV Studio',
-      metaDescription: 'Fast, secure website hosting and maintenance plans: backups, security updates, uptime monitoring and small changes each month, from a Melbourne studio.',
+      metaDescription: 'Fast, secure website hosting and maintenance plans: backups, security updates, uptime monitoring and small changes each month, from a Melbourne agency.',
       h1: 'Website hosting and maintenance',
       lead: 'Fast, secure hosting and a team on hand for changes, so your website keeps working while you get on with running the business.',
       intro: [

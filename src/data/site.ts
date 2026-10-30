@@ -2,7 +2,7 @@
 export const site = {
   name: 'JVDV Studio',
   shortName: 'JVDV',
-  description: 'JVDV Studio is a Melbourne web design and development studio. We design, build and look after websites, e-commerce stores and apps for businesses across Australia.',
+  description: 'JVDV Studio is a Melbourne web design and development agency. We design, build and look after websites, web apps and Shopify stores for small businesses across Australia.',
   founder: 'Josh Van Der Veen',
   email: 'hello@joshvdv.com',
   phone: '0444 529 866',
