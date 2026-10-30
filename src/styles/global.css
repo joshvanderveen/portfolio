@@ -196,7 +196,7 @@
   @media (max-width: 700px) {
     :root { --section: 64px; }
 
-    /* Logo and "Book a call" on one row, the page links on a row of their own. */
+    /* Logo and "Let’s chat" on one row, the page links on a row of their own. */
     .site-header { padding-block: 16px 4px; row-gap: 8px; }
     .site-nav { order: 3; flex: 1 1 100%; gap: 0 24px; border-top: 1px solid var(--line); }
     .site-nav a:not(.button) { display: inline-flex; align-items: center; min-height: 44px; }
