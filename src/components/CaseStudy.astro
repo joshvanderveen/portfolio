@@ -20,8 +20,8 @@ interface Props {
   heroScreen?: Screen;
   // Wide screenshot for link previews; defaults to the hero screenshot.
   ogScreen?: Screen;
-  // Slugs of the services this project used.
-  services: string[];
+  // Slugs of the services this project used, or a title and summary for work without a service page.
+  services: (string | { title: string; summary: string })[];
   next: { name: string; href: string };
   cta: { note: string; heading: string };
 }
@@ -29,7 +29,7 @@ const { name, kind, intro, description, facts, heroShot, heroScreens, heroScreen
 const path = Astro.url.pathname.replace(/\.html$/, '');
 const og = ogScreen && await getImage({ src: ogScreen.image, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'jpeg', quality: 82 });
 const image = og && ogScreen ? { src: og.src, width: 1200, height: 630, alt: ogScreen.alt } : undefined;
-const used = services.map(slug => serviceBySlug(slug)!).filter(Boolean);
+const used = services.map(item => (typeof item === 'string' ? serviceBySlug(item) : item)).filter(Boolean) as { slug?: string; title: string; summary: string }[];
 const caseLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
@@ -67,7 +67,9 @@ const caseLd = {
     <section class="section case-services" aria-labelledby="case-services-heading">
       <h2 id="case-services-heading">Services in this project</h2>
       <ul>
-        {used.map(service => <li><a href={`/services/${service.slug}`}><span class="case-services__title">{service.title}</span><span class="muted">{service.summary}</span></a></li>)}
+        {used.map(service => <li>{service.slug
+          ? <a href={`/services/${service.slug}`}><span class="case-services__title">{service.title}</span><span class="muted">{service.summary}</span></a>
+          : <div><span class="case-services__title">{service.title}</span><span class="muted">{service.summary}</span></div>}</li>)}
       </ul>
     </section>
   )}
@@ -94,12 +96,12 @@ const caseLd = {
   :global(.case-hero-shot) { margin-top: 20px; border-radius: 28px; }
   .case-services h2 { font-size: clamp(28px, 3vw, 40px); margin-bottom: 24px; }
   .case-services ul { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
-  .case-services a { display: flex; flex-direction: column; gap: 6px; height: 100%; box-sizing: border-box; background: var(--panel); border-radius: 24px; padding: 28px; text-decoration: none; }
+  .case-services li > * { display: flex; flex-direction: column; gap: 6px; height: 100%; box-sizing: border-box; background: var(--panel); border-radius: 24px; padding: 28px; text-decoration: none; }
   .case-services__title { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.02em; }
   @media (max-width: 700px) {
     .case-intro { gap: 28px; }
     /* A taller crop so the hero screenshot isn't a thin strip on a phone. */
     :global(.case-hero-shot) { aspect-ratio: 4 / 3; border-radius: 20px; margin-top: 12px; }
-    .case-services a { padding: 22px; border-radius: 20px; }
+    .case-services li > * { padding: 22px; border-radius: 20px; }
   }
 </style>
