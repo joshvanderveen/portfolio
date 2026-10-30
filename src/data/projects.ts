@@ -91,7 +91,7 @@ export const projects = {
   },
   foxwood: {
     name: 'Foxwood Media',
-    summary: 'A website for a Melbourne wedding and family photography team that they update themselves.',
+    summary: 'A website for a Melbourne-based wedding and family photography team.',
     tags: ['Website', 'SEO', 'Hosting'],
     categories: ['websites'],
     shot: 'Foxwood Media homepage',
