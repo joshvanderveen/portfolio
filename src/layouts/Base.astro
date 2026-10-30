@@ -5,7 +5,7 @@ import '@fontsource/caveat/latin-500.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { site, phoneHref } from '../data/site';
 import { services } from '../data/services';
 
 interface Props {
@@ -45,7 +45,7 @@ const organization = {
   description: site.description,
   url: home,
   email: site.email,
-  ...(site.phone ? { telephone: site.phone } : {}),
+  ...(site.phone ? { telephone: phoneHref.replace(/^tel:/, '') } : {}),
   logo: new URL('/icon-512.png', home).href,
   image: new URL('/og.png', home).href,
   founder: { '@type': 'Person', name: site.founder, sameAs: [site.linkedin, site.github] },

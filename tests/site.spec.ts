@@ -1,9 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { services } from '../src/data/services';
+import { homeServices, services } from '../src/data/services';
+import { site } from '../src/data/site';
 
 const pages = [
-  { path: '/', h1: 'Software that earns its keep.' },
+  { path: '/', h1: 'Websites that work as hard as you do.' },
   { path: '/work', h1: 'Built, launched and still looked after.' },
   { path: '/work/find-cards', h1: 'FIND Cards' },
   { path: '/work/foxwood-media', h1: 'Foxwood Media' },
@@ -37,6 +38,24 @@ for (const width of [1440, 390]) {
     expect(errors).toEqual([]);
   });
 }
+
+test('the home hero has one call to action and six service cards', async ({ page }) => {
+  await page.goto('/');
+  const hero = page.locator('main .hero');
+  await expect(hero.getByRole('link')).toHaveCount(1);
+  await expect(hero.getByRole('link', { name: 'Let’s chat' })).toHaveAttribute('href', '/contact');
+  const cards = page.locator('section[aria-labelledby="services-heading"] .tile');
+  await expect(cards).toHaveCount(6);
+  await expect(cards.locator('h3')).toHaveText(homeServices.map(item => item.title));
+});
+
+test('the contact page offers email and phone directly', async ({ page }) => {
+  await page.goto('/contact');
+  const direct = page.locator('.tile', { has: page.getByRole('heading', { name: 'Prefer direct?' }) });
+  await expect(direct).toContainText('Skip the form and reach us straight away.');
+  await expect(direct.getByRole('link', { name: site.email })).toHaveAttribute('href', `mailto:${site.email}`);
+  await expect(direct.getByRole('link', { name: '0444 529 866' })).toHaveAttribute('href', 'tel:+61444529866');
+});
 
 test('navigation marks the current page and reaches every section', async ({ page }) => {
   await page.goto('/');

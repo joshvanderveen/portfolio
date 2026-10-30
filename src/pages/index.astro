@@ -5,7 +5,7 @@ import Trusted from '../components/Trusted.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../data/site';
-import { services } from '../data/services';
+import { homeServices } from '../data/services';
 import { projects, findCardsScreens } from '../data/projects';
 
 const websiteLd = {
@@ -19,17 +19,16 @@ const websiteLd = {
 ---
 <Base
   title="Web Design & App Development in Melbourne | JVDV Studio"
-  description="JVDV Studio is a Melbourne web design and app development studio. We design, build and look after websites, Shopify stores and apps for businesses that want results."
+  description="JVDV Studio designs, builds and looks after websites and web apps for small businesses in Melbourne, so you can get back to running yours."
   jsonLd={[websiteLd]}
 >
   <section class="panel hero" style="align-items: center; gap: 48px">
     <div class="hero__main" style="gap: 28px">
       <p class="note note--accent">Melbourne design and development studio</p>
-      <h1 style="font-size: clamp(40px, 5.4vw, 76px); max-width: 15ch">Software that earns its keep.</h1>
-      <p class="lead">{site.name} is a web design and app development studio in Melbourne. We design, build and look after websites, e-commerce stores and apps for businesses that want results they can measure.</p>
+      <h1 style="font-size: clamp(40px, 5.4vw, 76px); max-width: 15ch">Websites that work as hard as you do.</h1>
+      <p class="lead">We design, build and look after websites and web apps for small businesses, so you can get back to running yours.</p>
       <div class="actions">
-        <a class="button" href="/contact">Book a free consult</a>
-        <a class="button button--outline" href="/work">See our work</a>
+        <a class="button" href="/contact">Let’s chat</a>
       </div>
     </div>
     <Shot label="FIND Cards app screens" screens={[findCardsScreens.home, findCardsScreens.deal, findCardsScreens.map]} ratio="1 / 1" priority class="home-hero-shot" />
@@ -54,7 +53,7 @@ const websiteLd = {
       <p class="muted">Strategy, design, development and support from one team, so nothing falls between suppliers.</p>
     </div>
     <ul class="grid grid--tight">
-      {services.map(service => <li class="tile"><h3><a href={`/services/${service.slug}`} style="text-decoration: none">{service.title}</a></h3><p>{service.summary}</p></li>)}
+      {homeServices.map(item => <li class="tile"><h3>{item.href ? <a href={item.href} style="text-decoration: none">{item.title}</a> : item.title}</h3><p>{item.text}</p></li>)}
     </ul>
   </section>
 
