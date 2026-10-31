@@ -19,6 +19,7 @@ export const nav = [
   { href: '/work', label: 'Work' },
   { href: '/services', label: 'Services' },
   { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 // Shown on the home and About pages.

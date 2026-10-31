@@ -23,6 +23,7 @@ There is no CMS; content lives in code.
 | `src/data/services.ts` | The five services, the home page service cards, the project steps and the FAQs |
 | `src/data/projects.ts` | Projects shown on the home and Work pages, with their tags and filter categories |
 | `src/pages/work/*.astro` | Case studies (`CaseStudy.astro` provides the shared frame) |
+| `src/content/blog/*.md` | Blog posts, one Markdown file each, served at `/blog/<file name>` (see `src/content.config.ts` for the front matter) |
 | `src/styles/global.css` | Colours, fonts and shared components |
 
 Image slots render as empty panels until screenshots are added: pass `src` (a file in `public/`) and `alt` to the `Shot` component. In `npm run dev` the empty slots are labelled with what belongs there.

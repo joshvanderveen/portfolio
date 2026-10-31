@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Band from '../../components/Band.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const format = (date: Date) => date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Australia/Melbourne' });
+---
+<Base
+  title="Blog: Website & Shopify Guides | JVDV Studio"
+  description="Plain-English guides from JVDV Studio on websites, web apps and Shopify stores, for business owners who want to make the right call before they spend."
+  breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'Blog', href: '/blog' }]}
+>
+  <section class="panel hero">
+    <div class="hero__main">
+      <p class="note note--accent">from the studio</p>
+      <h1 style="max-width: 16ch">Guides for business owners.</h1>
+    </div>
+    <p class="lead hero__side">Plain-English answers to the questions we get asked about websites, web apps and online stores.</p>
+  </section>
+
+  <section class="section" aria-label="Posts">
+    <ul class="grid" style="--min: 420px">
+      {posts.map(post => (
+        <li class="tile post-card">
+          <p class="dim post-card__date"><time datetime={post.data.date.toISOString().slice(0, 10)}>{format(post.data.date)}</time></p>
+          <h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          <a class="text-link" href={`/blog/${post.id}`}>Read the guide<span class="sr-only">: {post.data.title}</span></a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Band note="got a question of your own?" heading="Ask us. We’ll give you a straight answer." />
+</Base>
+
+<style>
+  .post-card { gap: 14px; padding: clamp(24px, 3vw, 36px); }
+  .post-card__date { font-size: 14px; }
+  .post-card h2 { font-size: clamp(24px, 2.4vw, 30px); letter-spacing: -0.02em; }
+  .post-card h2 a { text-decoration: none; }
+</style>
