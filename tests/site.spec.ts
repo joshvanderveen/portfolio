@@ -14,6 +14,8 @@ const pages = [
   { path: '/about', h1: 'A studio that sticks around after launch.' },
   { path: '/contact', h1: 'Let’s talk about your project.' },
   { path: '/privacy', h1: 'Privacy policy' },
+  { path: '/blog', h1: 'Guides for business owners.' },
+  { path: '/blog/hire-a-shopify-developer-australia', h1: 'How to hire a Shopify developer in Australia: eight questions to ask' },
 ];
 
 function watchErrors(page: Page) {
@@ -177,6 +179,7 @@ test('the Worker serves headers, metadata, sitemap and real 404s', async ({ requ
   const service = await (await request.get(`/services/${services[0].slug}`)).text();
   expect(service).toContain('"@type":"Service"');
   expect(await (await request.get('/work/homeward')).text()).toContain('"@type":"CreativeWork"');
+  expect(await (await request.get('/blog/hire-a-shopify-developer-australia')).text()).toContain('"@type":"BlogPosting"');
 
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap.match(/<loc>/g)).toHaveLength(pages.length);
